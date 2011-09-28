@@ -8,9 +8,9 @@ public class ConnectionFactory {
 	private String url, usuario, senha;
 
 	public ConnectionFactory() {
-		url = ""; // sera o url com o nome do servidor etc...
-		usuario = ""; // nome do usuario do bd
-		senha = ""; // senha do bd
+		url = "s11.eatj.com:3307/busaoproject";
+		usuario = "busaoproject";
+		senha = "inavoigbusao";
 	}
 
 	public Connection getConnection() throws SQLException {
