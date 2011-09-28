@@ -8,13 +8,15 @@ public class Empresa {
 	private int identificador;
 	private String nome;
 	private int anoFundacao;
+	private int cidadeId;
 	private List<Rota> rotas;
 	
-	public Empresa(int identificador, String nome, int anoFundacao) {
+	public Empresa(int identificador, String nome, int anoFundacao, int cidadeId) {
 		this.identificador = identificador;
 		this.nome = nome;
 		this.anoFundacao = anoFundacao;
 		this.rotas = new ArrayList<Rota>();
+		this.cidadeId = cidadeId;
 	}
 	
 	public Empresa(int identificador, String nome) {
@@ -53,5 +55,13 @@ public class Empresa {
 	
 	public void setAnoFundacao(int anoFundacao) {
 		this.anoFundacao = anoFundacao;
+	}
+	
+	public int getCidadeId() {
+		return cidadeId;
+	}
+	
+	public void setCidade(int cidadeId) {
+		this.cidadeId = cidadeId;
 	}
 }

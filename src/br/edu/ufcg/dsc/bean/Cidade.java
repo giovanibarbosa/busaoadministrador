@@ -7,28 +7,25 @@ public class Cidade {
 
 	private String nome;
 	private String estado;
-	private int valorTarifa;
+	private double valorTarifa;
 	private int identificacao;
-	private Ponto latitude;
-	private Ponto longitude;
+	private Ponto ponto;
 	private List<Empresa> empresasCadastradas;
 	
-	public Cidade (int identificacao, String nomeCidade, String estado, Ponto latitude, Ponto longitude) {
+	public Cidade (int identificacao, String nomeCidade, String estado, Ponto ponto) {
 		this.identificacao = identificacao;
 		this.nome = nomeCidade;
 		this.estado = estado;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.ponto = ponto;
 		this.empresasCadastradas = new ArrayList<Empresa>();
 	}
 
-	public Cidade (int identificacao, int valorTarifa, String nomeCidade, String estado, Ponto latitude, Ponto longitude) {
+	public Cidade (int identificacao, double valorTarifa, String nomeCidade, String estado, Ponto ponto) {
 		this.identificacao = identificacao;
 		this.valorTarifa = valorTarifa;
 		this.nome = nomeCidade;
 		this.estado = estado;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.ponto = ponto;
 		this.empresasCadastradas = new ArrayList<Empresa>();
 	}
 	
@@ -41,12 +38,12 @@ public class Cidade {
 		this.empresasCadastradas = empresasCadastradas;
 	}
 
-	public int getValorTarifa() {
+	public double getValorTarifa() {
 		return valorTarifa;
 	}
 
 
-	public void setValorTarifa(int valorTarifa) {
+	public void setValorTarifa(double valorTarifa) {
 		this.valorTarifa = valorTarifa;
 	}
 
@@ -61,23 +58,12 @@ public class Cidade {
 	}
 
 
-	public Ponto getLatitude() {
-		return latitude;
+	public Ponto getPonto() {
+		return ponto;
 	}
-
-
-	public void setLatitude(Ponto latitude) {
-		this.latitude = latitude;
-	}
-
-
-	public Ponto getLongitude() {
-		return longitude;
-	}
-
-
-	public void setLongitude(Ponto longitude) {
-		this.longitude = longitude;
+	
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
 	}
 
 	public String getNome() {

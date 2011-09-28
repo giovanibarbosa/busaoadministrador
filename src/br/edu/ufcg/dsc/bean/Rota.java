@@ -7,7 +7,8 @@ public class Rota {
 	
 	private String identificador;
 	private String cor;
-	private int numeroVisualizacao;	
+	private int numeroVisualizacao;
+	private int empresaId;
 	private List<Onibus> onibusParticipantes;
 	private List<Ponto> pontos;
 	private Horario horario;
@@ -46,6 +47,22 @@ public class Rota {
 		this.onibusParticipantes = onibusParticipantes;
 		this.pontos = pontos;
 		this.horario = horario;
+	}
+	
+	public Rota(String identificador, String cor, int numeroVisualizacao, Horario horario, int empresaId) {
+		this.identificador = identificador;
+		this.cor = cor;
+		this.numeroVisualizacao = numeroVisualizacao;
+		this.horario = horario;
+		this.empresaId = empresaId;
+	}
+
+	public int getEmpresaId() {
+		return empresaId;
+	}
+
+	public void setEmpresaId(int empresaId) {
+		this.empresaId = empresaId;
 	}
 
 	public String getIdentificador() {
