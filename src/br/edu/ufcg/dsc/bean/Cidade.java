@@ -29,6 +29,15 @@ public class Cidade {
 		this.empresasCadastradas = new ArrayList<Empresa>();
 	}
 	
+	public Cidade (double valorTarifa, String nomeCidade, String estado, Ponto ponto) {
+		this.identificacao = 0;
+		this.valorTarifa = valorTarifa;
+		this.nome = nomeCidade;
+		this.estado = estado;
+		this.ponto = ponto;
+		this.empresasCadastradas = new ArrayList<Empresa>();
+	}
+	
 
 	public List<Empresa> getEmpresasCadastradas() {
 		return empresasCadastradas;

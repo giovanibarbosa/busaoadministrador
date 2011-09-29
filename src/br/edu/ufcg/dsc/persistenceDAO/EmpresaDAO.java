@@ -31,12 +31,13 @@ public class EmpresaDAO {
 		if (empresa == null)
 			throw new IllegalArgumentException("Empresa nao foi criada");
 
-		String sql = "insert into empresa (nome, anoDeFundacao, cidadeId) values (?,?,?)";
+		String sql = "insert into empresa (id, nome, anoDeFundacao, cidadeId) values (?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
-		st.setString(1, empresa.getNome());
-		st.setInt(2, empresa.getAnoFundacao());
-		st.setInt(3, empresa.getCidadeId());
+		st.setInt(1, empresa.getIdentificador());
+		st.setString(2, empresa.getNome());
+		st.setInt(3, empresa.getAnoFundacao());
+		st.setInt(4, empresa.getCidadeId());
 
 		st.execute();
 		st.close();
@@ -78,13 +79,14 @@ public class EmpresaDAO {
 		if (empresa == null || empresaAtualizada == null)
 			throw new IllegalArgumentException("A Empresa nao pode ser atualizada");
 
-		String sql = "update empresa set nome = ?, anoDeFundacao = ?, cidadeId = ? where id = ?";
+		String sql = "update empresa set id = ?, nome = ?, anoDeFundacao = ?, cidadeId = ? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
-		st.setString(1, empresaAtualizada.getNome());
-		st.setInt(2, empresaAtualizada.getAnoFundacao());
-		st.setInt(3, empresaAtualizada.getCidadeId());
-		st.setInt(4, empresa.getIdentificador());
+		st.setInt(1, empresaAtualizada.getIdentificador());
+		st.setString(2, empresaAtualizada.getNome());
+		st.setInt(3, empresaAtualizada.getAnoFundacao());
+		st.setInt(4, empresaAtualizada.getCidadeId());
+		st.setInt(5, empresa.getIdentificador());
 
 		st.executeUpdate();
 		st.close();
