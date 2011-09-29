@@ -57,7 +57,7 @@
               <Component id="jLabel3" min="-2" pref="524" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
               <Component id="removeCidadeButton" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -85,9 +85,9 @@
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="removeCidadeButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,6 +95,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="adicionaCidadeButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/edu/ufcg/dsc/gui/images/1317256235_add1-.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Adicionar Nova Cidade"/>
       </Properties>
       <Events>
@@ -103,6 +106,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="removeCidadeButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/edu/ufcg/dsc/gui/images/1317256312_Delete.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Remover Cidade"/>
       </Properties>
       <Events>

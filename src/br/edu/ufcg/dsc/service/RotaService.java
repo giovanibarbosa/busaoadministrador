@@ -68,6 +68,11 @@ public class RotaService {
 		return false;
 	}
 	
+	public List<Rota> getRotas(){
+		//TODO
+		return null;
+	}
+	
 	public List<Ponto> pontosAntesIntegracao(){
 		//TODO
 		return null;

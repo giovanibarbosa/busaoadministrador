@@ -52,8 +52,18 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
 
         rotaButton.setText("Rota");
+        rotaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rotaButtonActionPerformed(evt);
+            }
+        });
 
         empresaButton.setText("Empresa");
+        empresaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empresaButtonActionPerformed(evt);
+            }
+        });
 
         onibusButton.setText("Ônibus");
 
@@ -129,6 +139,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         new MenuCidade().setVisible(true);
         dispose();
     }//GEN-LAST:event_cidadeButtonActionPerformed
+
+    private void empresaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empresaButtonActionPerformed
+        new MenuEmpresa().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_empresaButtonActionPerformed
+
+    private void rotaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotaButtonActionPerformed
+        new MenuRota().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_rotaButtonActionPerformed
 
     /**
      * @param args the command line arguments

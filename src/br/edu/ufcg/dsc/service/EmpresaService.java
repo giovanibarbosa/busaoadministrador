@@ -52,4 +52,8 @@ public class EmpresaService {
 		
 		return false;
 	}
+	
+	public List<Empresa> getEmpresas(){
+		return empresas;
+	}
 }
