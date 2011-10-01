@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rota {
-	
+
 	private String identificador;
 	private String cor;
 	private int numeroVisualizacao;
@@ -12,7 +12,8 @@ public class Rota {
 	private List<Onibus> onibusParticipantes;
 	private List<Ponto> pontos;
 	private Horario horario;
-	
+	private String urlRota;
+
 	public Rota(String identificador, List<Ponto> pontos, Horario horario) {
 		this.identificador = identificador;
 		this.pontos = pontos;
@@ -22,7 +23,8 @@ public class Rota {
 		this.cor = "Branco";
 	}
 
-	public Rota(String identificador, List<Onibus> onibusParticipantes, List<Ponto> pontos, Horario horario) {
+	public Rota(String identificador, List<Onibus> onibusParticipantes,
+			List<Ponto> pontos, Horario horario) {
 		this.identificador = identificador;
 		this.onibusParticipantes = onibusParticipantes;
 		this.pontos = pontos;
@@ -31,7 +33,8 @@ public class Rota {
 		this.cor = "Branco";
 	}
 
-	public Rota(String identificador, String cor, List<Ponto> pontos, Horario horario) {
+	public Rota(String identificador, String cor, List<Ponto> pontos,
+			Horario horario) {
 		this.identificador = identificador;
 		this.cor = cor;
 		this.pontos = pontos;
@@ -40,7 +43,9 @@ public class Rota {
 		this.numeroVisualizacao = 0;
 	}
 
-	public Rota(String identificador, String cor, List<Onibus> onibusParticipantes, List<Ponto> pontos, Horario horario) {
+	public Rota(String identificador, String cor,
+			List<Onibus> onibusParticipantes, List<Ponto> pontos,
+			Horario horario) {
 		this.identificador = identificador;
 		this.cor = cor;
 		this.numeroVisualizacao = 0;
@@ -48,13 +53,23 @@ public class Rota {
 		this.pontos = pontos;
 		this.horario = horario;
 	}
-	
-	public Rota(String identificador, String cor, int numeroVisualizacao, Horario horario, int empresaId) {
+
+	public Rota(String identificador, String cor, int numeroVisualizacao,
+			Horario horario, int empresaId, String urlRota) {
 		this.identificador = identificador;
 		this.cor = cor;
 		this.numeroVisualizacao = numeroVisualizacao;
 		this.horario = horario;
 		this.empresaId = empresaId;
+		this.urlRota = urlRota;
+	}
+
+	public String getUrlRota() {
+		return urlRota;
+	}
+
+	public void setUrlRota(String urlRota) {
+		this.urlRota = urlRota;
 	}
 
 	public int getEmpresaId() {
@@ -112,5 +127,5 @@ public class Rota {
 	public void setHorario(Horario horario) {
 		this.horario = horario;
 	}
-	
+
 }

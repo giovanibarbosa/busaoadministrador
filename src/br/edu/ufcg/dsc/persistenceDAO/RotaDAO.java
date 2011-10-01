@@ -33,8 +33,8 @@ public class RotaDAO {
 			throw new IllegalArgumentException("Rota nao foi criada");
 
 		String sql = "insert into rota (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino) "
-				+ "values (?,?,?,?,?,?,?,?,?,?)";
+				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rota.getIdentificador());
@@ -47,6 +47,7 @@ public class RotaDAO {
 		st.setInt(8, rota.getHorario().getHoraInicio().getMinutos());
 		st.setInt(9, rota.getHorario().getHoraTermino().getHora());
 		st.setInt(10, rota.getHorario().getHoraTermino().getMinutos());
+		st.setString(11, rota.getUrlRota());
 
 		st.execute();
 		st.close();
@@ -59,7 +60,7 @@ public class RotaDAO {
 					"O identificador da Rota deve ser valido");
 
 		String sql = "select (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino) "
+				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
 				+ "from rota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Rota rota = null;
@@ -87,7 +88,7 @@ public class RotaDAO {
 									rs.getInt("minutoInicio")), new Tempo(
 									rs.getInt("horaTermino"),
 									rs.getInt("minutoTermino"))),
-					rs.getInt("empresaId"));
+					rs.getInt("empresaId"), rs.getString("urlRota"));
 			rotas.add(rota);
 		}
 		return rotas;
@@ -100,7 +101,7 @@ public class RotaDAO {
 
 		String sql = "update rota set id = ?, cor = ?, numeroVisualizacao = ?, emrpesaId = ?, "
 				+ "diferencaEntreOnibus = ?, tempoPercusoTotal = ?, horaInicio = ?, minutoInicio = ?, "
-				+ "horaTermino = ?, minutoTermino = ? where id = ?";
+				+ "horaTermino = ?, minutoTermino = ?, urlRota = ? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rotaAtualizada.getIdentificador());
@@ -113,7 +114,8 @@ public class RotaDAO {
 		st.setInt(8, rotaAtualizada.getHorario().getHoraInicio().getMinutos());
 		st.setInt(9, rotaAtualizada.getHorario().getHoraTermino().getHora());
 		st.setInt(10, rotaAtualizada.getHorario().getHoraTermino().getMinutos());
-		st.setString(11, rota.getIdentificador());
+		st.setString(11, rotaAtualizada.getUrlRota());
+		st.setString(12, rota.getIdentificador());
 		
 		st.executeUpdate();
 		st.close();
