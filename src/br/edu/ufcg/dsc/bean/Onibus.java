@@ -41,4 +41,8 @@ public class Onibus {
 		this.capacidade = capacidade;
 	}
 	
+	@Override
+	public String toString() {
+		return "Identificador: " + getIdentificador() + ". Capacidade: " + getCapacidade();
+	}
 }

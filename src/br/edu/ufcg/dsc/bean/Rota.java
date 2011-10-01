@@ -64,6 +64,13 @@ public class Rota {
 		this.urlRota = urlRota;
 	}
 
+	@Override
+	public String toString() {
+		return "Identificador: " + getIdentificador() + ". Cor: "
+				+ ". Número de visualização: " + getNumeroVisualizacao()
+				+ getHorario();
+	}
+
 	public String getUrlRota() {
 		return urlRota;
 	}

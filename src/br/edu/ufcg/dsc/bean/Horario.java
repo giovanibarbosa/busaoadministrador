@@ -8,13 +8,21 @@ public class Horario {
 	private int tempoPercursoTotal;
 	private Tempo horaInicio;
 	private Tempo horaTermino;
-	
+
 	public Horario(int diferencaEntreOnibus, int tempoPercursoTotal,
 			Tempo horaInicio, Tempo horaTermino) {
 		this.diferencaEntreOnibus = diferencaEntreOnibus;
 		this.tempoPercursoTotal = tempoPercursoTotal;
 		this.horaInicio = horaInicio;
 		this.horaTermino = horaTermino;
+	}
+
+	@Override
+	public String toString() {
+		return "Diferença entre onibus: " + getDiferencaEntreOnibus()
+				+ ". Tempo total do percusso: " + getTempoPercursoTotal()
+				+ ". Horário de início: " + getHoraInicio()
+				+ ". Horário de término: " + getHoraTermino();
 	}
 
 	public int getDiferencaEntreOnibus() {
@@ -48,5 +56,5 @@ public class Horario {
 	public void setHoraTermino(Tempo horaTermino) {
 		this.horaTermino = horaTermino;
 	}
-	
+
 }

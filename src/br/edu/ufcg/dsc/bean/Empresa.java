@@ -10,7 +10,7 @@ public class Empresa {
 	private int anoFundacao;
 	private int cidadeId;
 	private List<Rota> rotas;
-	
+
 	public Empresa(int identificador, String nome, int anoFundacao, int cidadeId) {
 		this.identificador = identificador;
 		this.nome = nome;
@@ -18,13 +18,19 @@ public class Empresa {
 		this.rotas = new ArrayList<Rota>();
 		this.cidadeId = cidadeId;
 	}
-	
+
 	public Empresa(int identificador, String nome) {
 		this.identificador = identificador;
 		this.nome = nome;
 		this.rotas = new ArrayList<Rota>();
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Identificador: " + getIdentificador() + ". Nome: " + getNome()
+				+ ". Ano de fundação: " + getAnoFundacao();
+	}
+
 	public List<Rota> getRotas() {
 		return rotas;
 	}
@@ -36,31 +42,31 @@ public class Empresa {
 	public int getIdentificador() {
 		return identificador;
 	}
-	
+
 	public void setIdentificador(int identificador) {
 		this.identificador = identificador;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public int getAnoFundacao() {
 		return anoFundacao;
 	}
-	
+
 	public void setAnoFundacao(int anoFundacao) {
 		this.anoFundacao = anoFundacao;
 	}
-	
+
 	public int getCidadeId() {
 		return cidadeId;
 	}
-	
+
 	public void setCidade(int cidadeId) {
 		this.cidadeId = cidadeId;
 	}

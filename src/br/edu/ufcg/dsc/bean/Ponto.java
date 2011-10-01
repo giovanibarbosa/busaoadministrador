@@ -23,4 +23,9 @@ public class Ponto {
 		this.latitude = latitude;
 	}
 	
+	@Override
+	public String toString() {
+		return "Latitude: " + getLatitude() + ", Longitude: " + getLongitude();
+	}
+	
 }
