@@ -1,5 +1,7 @@
 package br.edu.ufcg.dsc.facade;
 
+import java.sql.SQLException;
+
 import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
@@ -8,9 +10,9 @@ import br.edu.ufcg.dsc.util.Tempo;
 
 public interface BusaoAdministradorFacadeIF {
 	
-	public boolean adicionarCidade(Cidade c);
+	public void adicionarCidade(Cidade c) throws IllegalArgumentException, SQLException;
 	
-	public boolean removerCidade(Cidade c);
+	public void removerCidade(Cidade c) throws IllegalArgumentException, SQLException;
 	
 	public boolean adicionarOnibus(Onibus o);
 	
@@ -29,4 +31,6 @@ public interface BusaoAdministradorFacadeIF {
 	public Tempo calculaProximaPassagem (Rota r, Tempo temp);
 	
 	public Tempo calcularTodosHorarios (Rota r);
+
+	int calculaProximaPassagem(String idRota) throws IllegalArgumentException, SQLException;
 }

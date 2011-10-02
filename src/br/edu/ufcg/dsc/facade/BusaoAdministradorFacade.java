@@ -1,5 +1,7 @@
 package br.edu.ufcg.dsc.facade;
 
+import java.sql.SQLException;
+
 import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
@@ -19,13 +21,13 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	private RotaService rs;
 
 	@Override
-	public boolean adicionarCidade(Cidade c) {
-		return cs.adicionarCidade(c);
+	public void adicionarCidade(Cidade c) throws IllegalArgumentException, SQLException {
+		cs.adicionarCidade(c);
 	}
 
 	@Override
-	public boolean removerCidade(Cidade c) {
-		return cs.removeCidade(c);
+	public void removerCidade(Cidade c) throws IllegalArgumentException, SQLException {
+		cs.removeCidade(c);
 	}
 
 	@Override
@@ -64,13 +66,19 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public Tempo calculaProximaPassagem(Rota r, Tempo temp) {
-		return rs.calculaProximaPassagem(r, temp);
+	public int calculaProximaPassagem(String idRota) throws IllegalArgumentException, SQLException {
+		return rs.calculaProximaPassagem(idRota);
 	}
 
 	@Override
 	public Tempo calcularTodosHorarios(Rota r) {
 		return rs.calcularTodosHorarios(r);
+	}
+
+	@Override
+	public Tempo calculaProximaPassagem(Rota r, Tempo temp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

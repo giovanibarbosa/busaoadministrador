@@ -11,6 +11,8 @@
 package br.edu.ufcg.dsc.gui;
 
 import br.edu.ufcg.dsc.service.CidadeService;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -63,7 +65,12 @@ public class MenuCidade extends javax.swing.JFrame {
         removeCidadeButton.setText("Remover Cidade");
         removeCidadeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCidadeButtonActionPerformed(evt);
+                try {
+					removeCidadeButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -150,7 +157,7 @@ public class MenuCidade extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_adicionaCidadeButtonActionPerformed
 
-    private void removeCidadeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCidadeButtonActionPerformed
+    private void removeCidadeButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_removeCidadeButtonActionPerformed
         List<String> cidades = new ArrayList<String>();
         
         for (int i = 0; i < CidadeService.getInstance().getCidadesAplicativo().size(); i++) {

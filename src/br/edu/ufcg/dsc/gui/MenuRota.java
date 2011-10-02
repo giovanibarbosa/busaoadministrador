@@ -12,6 +12,8 @@ package br.edu.ufcg.dsc.gui;
 
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.service.RotaService;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -110,7 +112,12 @@ public class MenuRota extends javax.swing.JFrame {
         removerRotaButton.setText("Remover Rota");
         removerRotaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removerRotaButtonActionPerformed(evt);
+                try {
+					removerRotaButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -260,7 +267,7 @@ public class MenuRota extends javax.swing.JFrame {
         //add onibus
     }//GEN-LAST:event_addOnibusButtonActionPerformed
 
-    private void removerRotaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerRotaButtonActionPerformed
+    private void removerRotaButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_removerRotaButtonActionPerformed
         List<String> rotas = new ArrayList<String>();
         
         for (int i = 0; i < RotaService.getInstance().getRotas().size(); i++) {

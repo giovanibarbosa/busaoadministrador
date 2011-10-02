@@ -14,6 +14,14 @@ public class Rota {
 	private Horario horario;
 	private String urlRota;
 
+	
+	public Rota(){
+		this.pontos = new ArrayList<Ponto>();
+		this.onibusParticipantes = new ArrayList<Onibus>();
+		this.numeroVisualizacao = 0;
+		this.cor = "Branco";
+	}
+	
 	public Rota(String identificador, List<Ponto> pontos, Horario horario) {
 		this.identificador = identificador;
 		this.pontos = pontos;

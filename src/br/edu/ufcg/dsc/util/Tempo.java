@@ -26,7 +26,7 @@ public class Tempo {
 		this.minutos = minutos;
 	}
 	
-	public String getHorarioToString() {
+	public String toString() {
 		return hora+"" + ":" + minutos+"" +"h";
 	}
 	

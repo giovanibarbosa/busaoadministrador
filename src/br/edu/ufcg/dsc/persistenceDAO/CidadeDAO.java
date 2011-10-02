@@ -63,6 +63,13 @@ public class CidadeDAO {
 		st.close();
 		return cidade;
 	}
+	
+	//pesquisa cidade
+	//A partir da chava primaria. Acessa o nome da cidade e retorna.
+	public String recuperarCidadePorId(int id){
+		//TODO
+		return "";
+	}
 
 	private List<Cidade> resultSetToList(ResultSet rs) throws SQLException {
 		List<Cidade> cidades = new ArrayList<Cidade>();

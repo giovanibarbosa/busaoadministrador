@@ -16,8 +16,13 @@ public class RotaDAO {
 	private Connection conexao;
 	private static RotaDAO instancia;
 
-	private RotaDAO() throws SQLException {
-		conexao = new ConnectionFactory().getConnection();
+	public RotaDAO() throws SQLException {
+		
+		try {
+			conexao = new ConnectionFactory().getConnection();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static RotaDAO getInstance() throws SQLException {
@@ -74,6 +79,7 @@ public class RotaDAO {
 		st.close();
 		return rota;
 	}
+	
 
 	private List<Rota> resultSetToList(ResultSet rs) throws SQLException {
 		List<Rota> rotas = new ArrayList<Rota>();
@@ -130,7 +136,7 @@ public class RotaDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rota.getIdentificador());
-
+		
 		st.execute();
 		st.close();
 	}
@@ -139,6 +145,31 @@ public class RotaDAO {
 		String sql = "select * from rota";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		return resultSetToList(st.executeQuery());
+	}
+	
+	
+	public List<String> resultSetToListSearch(ResultSet rs) throws SQLException {
+		
+		List<String> rotas = new ArrayList<String>();
+		Rota rota = null;
+		
+		//Giovani, aqui eu quero que pesquise o q tem identificador parecido e retorne.
+		while (rs.next()){
+			
+			//rota = new Rota (rs.getString("id").equals(anObject));
+			
+			//rotas.add(rota.getIdentificador());
+		}
+		
+		return rotas;
+	}
+	
+	
+	//Pra pesquisar por rota com identificador igual ou parecido
+	public List<String> pesquisaRota (String identificador) throws SQLException {
+		String sql = "select r from rota where r.id=" + identificador;
+		PreparedStatement st = conexao.prepareStatement(sql);
+		return resultSetToListSearch(st.executeQuery());
 	}
 
 }
