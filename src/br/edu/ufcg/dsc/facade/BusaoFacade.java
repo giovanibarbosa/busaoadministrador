@@ -9,11 +9,12 @@ import br.edu.ufcg.dsc.service.RotaService;
 
 public class BusaoFacade{
 
-		private RotaService rs = new RotaService();
-		private CidadeService cs = new CidadeService();
+		private RotaService rs;
+		private CidadeService cs;
 	
-		public BusaoFacade(){
-			
+		public BusaoFacade() throws SQLException{
+			rs = new RotaService();
+			cs = new CidadeService();
 		}
 
 		//Aqui tem que especificar mais Julio. Tu pegar valor de que tabela ? So de Rota ? 

@@ -3,7 +3,6 @@ package br.edu.ufcg.dsc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.edu.ufcg.dsc.bean.Horario;
 import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Ponto;
 import br.edu.ufcg.dsc.bean.Rota;
@@ -15,13 +14,15 @@ public class RotaService {
 
 	private static RotaService instanciaUnica;
 	//?????????
-	private RotaDAO rd = RotaDAO.getInstance();
+	private RotaDAO rd;
 	private final Ponto INTEGRACAO = new Ponto (-7.219459, -35.889641);
 	private final int MILISSEGUNDOS_PARA_MINUTO = 60000;
 	
-	public RotaService(){}
+	public RotaService() throws SQLException{
+		rd = RotaDAO.getInstance();
+	}
 	
-	public static RotaService getInstance() {
+	public static RotaService getInstance() throws SQLException {
 		
 		if (instanciaUnica == null){
 			RotaService rs = new RotaService();

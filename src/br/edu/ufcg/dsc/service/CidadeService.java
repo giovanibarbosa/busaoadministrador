@@ -1,7 +1,6 @@
 package br.edu.ufcg.dsc.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Cidade;
@@ -12,11 +11,13 @@ public class CidadeService {
 
 	private static CidadeService instanciaUnica;
 	//?????????
-	private CidadeDAO cd = CidadeDAO.getInstance();
+	private CidadeDAO cd;
 	
-	public CidadeService () {}
+	public CidadeService () throws SQLException {
+		cd = CidadeDAO.getInstance();
+	}
 	
-	public static CidadeService getInstance() {
+	public static CidadeService getInstance() throws SQLException {
 	
 		if (instanciaUnica == null){
 			CidadeService gc = new CidadeService();
