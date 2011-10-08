@@ -65,8 +65,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
         });
 
-        onibusButton.setText("Ônibus");
-
+        onibusButton.setText("Onibus");
+        onibusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onibusButtonActionPerformed(evt);
+            }
+        });
+        
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ufcg/dsc/gui/images/logotipo_principal.png"))); // NOI18N
 
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ufcg/dsc/gui/images/1317174121_door_out.png"))); // NOI18N
@@ -136,20 +141,32 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void cidadeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeButtonActionPerformed
-        new MenuCidade().setVisible(true);
+    	MenuCidade cidade = new MenuCidade();
+    	cidade.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        cidade.setVisible(true);
         dispose();
     }//GEN-LAST:event_cidadeButtonActionPerformed
 
     private void empresaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empresaButtonActionPerformed
-        new MenuEmpresa().setVisible(true);
+    	MenuEmpresa empresa = new MenuEmpresa();
+    	empresa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        empresa.setVisible(true);
         dispose();
     }//GEN-LAST:event_empresaButtonActionPerformed
 
     private void rotaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotaButtonActionPerformed
-        new MenuRota().setVisible(true);
+    	MenuRota rota = new MenuRota();
+    	rota.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        rota.setVisible(true);
         dispose();
     }//GEN-LAST:event_rotaButtonActionPerformed
-
+    
+    private void onibusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotaButtonActionPerformed
+    	MenuOnibus onibus = new MenuOnibus();
+    	onibus.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        onibus.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_rotaButtonActionPerformed
     /**
      * @param args the command line arguments
      */

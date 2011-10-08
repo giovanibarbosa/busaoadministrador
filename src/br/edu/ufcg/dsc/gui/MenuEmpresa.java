@@ -62,7 +62,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
 
         jLabel3.setText("Nome: ");
 
-        jLabel4.setText("Ano de Fundação: ");
+        jLabel4.setText("Ano de Fundacao: ");
 
         adicionarEmpresaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ufcg/dsc/gui/images/1317256235_add1-.png"))); // NOI18N
         adicionarEmpresaButton.setText("Adicionar Empresa");
@@ -72,7 +72,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Para remover uma Empresa, pressione o botão abaixo e escolha a Empresa a ser removida.");
+        jLabel5.setText("Para remover uma Empresa, pressione o botao abaixo e escolha a Empresa a ser removida.");
 
         removerEmpresaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ufcg/dsc/gui/images/1317256312_Delete.png"))); // NOI18N
         removerEmpresaButton.setText("Remover Empresa");
@@ -96,12 +96,12 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 .addComponent(identificadorEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(anoFundacaoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addComponent(removerEmpresaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,7 +113,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                         .addGap(76, 76, 76)
                         .addComponent(nomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(adicionarEmpresaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(adicionarEmpresaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(

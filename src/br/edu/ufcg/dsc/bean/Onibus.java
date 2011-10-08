@@ -8,10 +8,14 @@ public class Onibus {
 	private int rotaId;
 	
 	public Onibus (String identificador){
+		validaIdentificador(identificador);
 		this.identificador = identificador;
 	}
 	
 	public Onibus (String identificador, int capacidade, int rotaId){
+		validaIdentificador(identificador);
+		validaCapacidade(capacidade);
+		validaRotaId(rotaId);
 		this.identificador = identificador;
 		this.capacidade = capacidade;
 		this.rotaId = rotaId;
@@ -23,6 +27,7 @@ public class Onibus {
 
 	public void setRotaId(int rotaId) {
 		this.rotaId = rotaId;
+		this.rotaId = rotaId;
 	}
 
 	public String getIdentificador() {
@@ -30,6 +35,7 @@ public class Onibus {
 	}
 
 	public void setIdentificador(String identificador) {
+		validaIdentificador(identificador);
 		this.identificador = identificador;
 	}
 
@@ -38,11 +44,26 @@ public class Onibus {
 	}
 
 	public void setCapacidade(int capacidade) {
+		validaCapacidade(capacidade);
 		this.capacidade = capacidade;
 	}
 	
 	@Override
 	public String toString() {
 		return "Identificador: " + getIdentificador() + ". Capacidade: " + getCapacidade();
+	}
+	
+	private void validaIdentificador(String identificador){
+		if (identificador == null || identificador.trim().isEmpty())
+			throw new IllegalArgumentException("Identificador invalido");
+	}
+	private void validaCapacidade(int capacidade){
+		if (capacidade <0)
+			throw new IllegalArgumentException("Capacidade invalida");
+	}
+	
+	private void validaRotaId(int rotaId){
+		if (rotaId < 0)
+			throw new IllegalArgumentException("ID de rota invalida");
 	}
 }

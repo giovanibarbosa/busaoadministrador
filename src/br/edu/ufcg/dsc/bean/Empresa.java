@@ -12,6 +12,10 @@ public class Empresa {
 	private List<Rota> rotas;
 
 	public Empresa(int identificador, String nome, int anoFundacao, int cidadeId) {
+		validaId(identificador);
+		validaNome(nome);
+		validaAnoFundacao(anoFundacao);
+		validaIdCidade(cidadeId);
 		this.identificador = identificador;
 		this.nome = nome;
 		this.anoFundacao = anoFundacao;
@@ -20,6 +24,8 @@ public class Empresa {
 	}
 
 	public Empresa(int identificador, String nome) {
+		validaId(identificador);
+		validaNome(nome);
 		this.identificador = identificador;
 		this.nome = nome;
 		this.rotas = new ArrayList<Rota>();
@@ -36,6 +42,8 @@ public class Empresa {
 	}
 
 	public void setRotas(List<Rota> rotas) {
+		if (rotas == null || rotas.isEmpty())
+			throw new IllegalArgumentException("Lista de rotas invalida");
 		this.rotas = rotas;
 	}
 
@@ -44,6 +52,7 @@ public class Empresa {
 	}
 
 	public void setIdentificador(int identificador) {
+		validaId(identificador);
 		this.identificador = identificador;
 	}
 
@@ -52,6 +61,7 @@ public class Empresa {
 	}
 
 	public void setNome(String nome) {
+		validaNome(nome);
 		this.nome = nome;
 	}
 
@@ -60,6 +70,7 @@ public class Empresa {
 	}
 
 	public void setAnoFundacao(int anoFundacao) {
+		validaAnoFundacao(anoFundacao);
 		this.anoFundacao = anoFundacao;
 	}
 
@@ -68,6 +79,25 @@ public class Empresa {
 	}
 
 	public void setCidade(int cidadeId) {
+		validaIdCidade(cidadeId);
 		this.cidadeId = cidadeId;
 	}
+	
+	private void validaId(int id){
+		if (id < 0 )
+			throw new IllegalArgumentException("Identificador de empresa invalido");
+	}
+	private void validaNome(String nome){
+		if (nome == null || nome.trim().isEmpty())
+			throw new IllegalArgumentException("Nome de empresa invalido");
+	}
+	private void validaAnoFundacao(int anoFundacao){
+		if (anoFundacao < 1900 )
+			throw new IllegalArgumentException("Ano de fundacao invalido");
+	}
+	private void validaIdCidade(int cidadeId){
+		if (cidadeId < 0 )
+			throw new IllegalArgumentException("Identificador de cidade invalido");
+	}
+
 }

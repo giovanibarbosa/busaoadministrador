@@ -85,11 +85,11 @@ public class MenuCidade extends javax.swing.JFrame {
 
         jLabel2.setText("Estado:");
 
-        jLabel3.setText("Para remover uma Cidade, acessar botão abaixo e escolher cidade a ser removida.");
+        jLabel3.setText("Para remover uma Cidade, acessar botao abaixo e escolher cidade a ser removida.");
 
-        estadoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espiríto Santo", "Góias ", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+        estadoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acre", "Alagoas", "Amapa", "Amazonas", "Bahia", "Ceara", "Distrito Federal", "Espirito Santo", "Goias ", "Maranhao", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Para", "Paraiba", "Parana", "Pernambuco", "Piaui", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondonia", "Roraima", "Santa Catarina", "Sao Paulo", "Sergipe", "Tocantins" }));
 
-        jLabel4.setText("Para adicionar uma nova Cidade, completar campos abaixo e pressione o botão.");
+        jLabel4.setText("Para adicionar uma nova Cidade, completar campos abaixo e pressione o botao.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +118,7 @@ public class MenuCidade extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
-                .addComponent(removeCidadeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(removeCidadeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +166,7 @@ public class MenuCidade extends javax.swing.JFrame {
         
         dispose();
         
-        String removeCidade = (String) JOptionPane.showInputDialog(null,"Escolha a cidade que deseja remover:", "Busão Administrador",
+        String removeCidade = (String) JOptionPane.showInputDialog(null,"Escolha a cidade que deseja remover:", "Busao Administrador",
 			JOptionPane.PLAIN_MESSAGE, null, cidades.toArray(), cidades.toArray()[0]);
         
         //remove cidade

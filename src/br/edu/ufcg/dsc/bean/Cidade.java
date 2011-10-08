@@ -14,6 +14,10 @@ public class Cidade {
 
 	public Cidade(int identificacao, String nomeCidade, String estado,
 			Ponto ponto) {
+		validaId(identificacao);
+		validaNome(nomeCidade);
+		validaEstado(estado);
+		validaPonto(ponto);
 		this.identificacao = identificacao;
 		this.nome = nomeCidade;
 		this.estado = estado;
@@ -23,6 +27,11 @@ public class Cidade {
 
 	public Cidade(int identificacao, double valorTarifa, String nomeCidade,
 			String estado, Ponto ponto) {
+		validaId(identificacao);
+		validaNome(nomeCidade);
+		validaEstado(estado);
+		validaPonto(ponto);
+		validaTarifa(valorTarifa);
 		this.identificacao = identificacao;
 		this.valorTarifa = valorTarifa;
 		this.nome = nomeCidade;
@@ -33,6 +42,10 @@ public class Cidade {
 
 	public Cidade(double valorTarifa, String nomeCidade, String estado,
 			Ponto ponto) {
+		validaTarifa(valorTarifa);
+		validaNome(nomeCidade);
+		validaEstado(estado);
+		validaPonto(ponto);
 		this.identificacao = 0;
 		this.valorTarifa = valorTarifa;
 		this.nome = nomeCidade;
@@ -46,6 +59,8 @@ public class Cidade {
 	}
 
 	public void setEmpresasCadastradas(List<Empresa> empresasCadastradas) {
+		if (empresasCadastradas == null || empresasCadastradas.isEmpty())
+			throw new IllegalArgumentException("Lista de empresas vazia");
 		this.empresasCadastradas = empresasCadastradas;
 	}
 
@@ -54,6 +69,7 @@ public class Cidade {
 	}
 
 	public void setValorTarifa(double valorTarifa) {
+		validaTarifa(valorTarifa);
 		this.valorTarifa = valorTarifa;
 	}
 
@@ -62,6 +78,7 @@ public class Cidade {
 	}
 
 	public void setIdentificacao(int identificacao) {
+		validaId(identificacao);
 		this.identificacao = identificacao;
 	}
 
@@ -70,6 +87,7 @@ public class Cidade {
 	}
 
 	public void setPonto(Ponto ponto) {
+		validaPonto(ponto);
 		this.ponto = ponto;
 	}
 
@@ -78,6 +96,7 @@ public class Cidade {
 	}
 
 	public void setNome(String nome) {
+		validaNome(nome);
 		this.nome = nome;
 	}
 
@@ -86,6 +105,7 @@ public class Cidade {
 	}
 
 	public void setEstado(String estado) {
+		validaEstado(estado);
 		this.estado = estado;
 	}
 
@@ -94,4 +114,29 @@ public class Cidade {
 		return getNome() + " - " + getEstado() + ". Tarifa: " + getValorTarifa() + ". "
 				+ getPonto();
 	}
+	
+	private void validaNome(String nome){
+		if (nome == null || nome.trim().isEmpty())
+			throw new IllegalArgumentException("Nome de cidade invalido");
+	}
+	
+	private void validaEstado(String estado){
+		if (estado == null || estado.trim().isEmpty())
+			throw new IllegalArgumentException("Estado invalido");
+		
+	}
+	private void validaTarifa(double valorTarifa){
+		if (valorTarifa <= 0)
+			throw new IllegalArgumentException("Valor de tarifa menor ou igual a zero");
+	}
+	private void validaId(int id){
+		if (id < 0)
+			throw new IllegalArgumentException("Identificacao de cidade invalida");
+	}
+	private void validaPonto(Ponto ponto){
+		if (ponto == null)
+			throw new IllegalArgumentException("Ponto invalido");
+	}
+	
+	
 }

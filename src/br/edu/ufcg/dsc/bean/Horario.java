@@ -11,6 +11,9 @@ public class Horario {
 
 	public Horario(int diferencaEntreOnibus, int tempoPercursoTotal,
 			Tempo horaInicio, Tempo horaTermino) {
+		validaDiferenca(diferencaEntreOnibus);
+		validaPercurso(tempoPercursoTotal);
+		validaTempo(horaInicio, horaTermino);
 		this.diferencaEntreOnibus = diferencaEntreOnibus;
 		this.tempoPercursoTotal = tempoPercursoTotal;
 		this.horaInicio = horaInicio;
@@ -30,6 +33,7 @@ public class Horario {
 	}
 
 	public void setDiferencaEntreOnibus(int diferencaEntreOnibus) {
+		validaDiferenca(diferencaEntreOnibus);
 		this.diferencaEntreOnibus = diferencaEntreOnibus;
 	}
 
@@ -38,6 +42,7 @@ public class Horario {
 	}
 
 	public void setTempoPercursoTotal(int tempoPercursoTotal) {
+		validaPercurso(tempoPercursoTotal);
 		this.tempoPercursoTotal = tempoPercursoTotal;
 	}
 
@@ -46,6 +51,7 @@ public class Horario {
 	}
 
 	public void setHoraInicio(Tempo horaInicio) {
+		validaTempo(horaInicio, this.horaTermino);
 		this.horaInicio = horaInicio;
 	}
 
@@ -54,7 +60,27 @@ public class Horario {
 	}
 
 	public void setHoraTermino(Tempo horaTermino) {
+		validaTempo(this.horaInicio, horaTermino);
 		this.horaTermino = horaTermino;
 	}
 
+	private void validaDiferenca(int dif) {
+		if (dif <= 0)
+			throw new IllegalArgumentException(
+					"Diferenca de tempo entre onibus invalida");
+	}
+
+	private void validaPercurso(int percurso) {
+		if (percurso <= 0)
+			throw new IllegalArgumentException(
+					"Tempo de percurso total invalido");
+	}
+
+	private void validaTempo(Tempo tempoInicial, Tempo tempoFinal) {
+		if (tempoInicial == null
+				|| tempoFinal == null
+				|| (tempoFinal.getHora() <= tempoInicial.getHora() && tempoFinal
+						.getMinutos() <= tempoInicial.getMinutos()))
+			throw new IllegalArgumentException("Intervalo de tempo invalido");
+	}
 }

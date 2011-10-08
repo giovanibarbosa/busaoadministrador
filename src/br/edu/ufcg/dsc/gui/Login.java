@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Busão - Administrador Login");
+        jLabel1.setText("Busao - Administrador Login");
 
         jLabel2.setText("Login:");
 
