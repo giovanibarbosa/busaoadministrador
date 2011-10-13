@@ -1,23 +1,20 @@
 package br.edu.ufcg.dsc.service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Onibus;
-import br.edu.ufcg.dsc.exceptions.IdentificadorInvalidoException;
-import br.edu.ufcg.dsc.exceptions.OnibusNaoEncontradoException;
-import br.edu.ufcg.dsc.exceptions.ParametroInvalidoException;
+import br.edu.ufcg.dsc.persistenceDAO.OnibusDAO;
 
 public class OnibusService {
-
 	private static OnibusService instanciaUnica;
-	private List<Onibus> onibus;
+	private OnibusDAO busDAO;
 	
-	public OnibusService () {
-		this.onibus = new ArrayList<Onibus>();
+	private OnibusService () throws SQLException {
+		busDAO = OnibusDAO.getInstance();
 	}
 	
-	public static OnibusService getInstance() {
+	public static OnibusService getInstance() throws SQLException {
 		
 		if (instanciaUnica == null){
 			OnibusService os = new OnibusService();
@@ -28,42 +25,24 @@ public class OnibusService {
 		
 	}
 	
-	public boolean addOnibus (Onibus o){
-		
-		if (!onibus.contains(o)){
-			onibus.add(o);
-			return true;
-		}
-		
-		return false;
+	public void addOnibus (Onibus o) throws IllegalArgumentException, SQLException{
+		busDAO.criar(o);		
 	}
 	
-	public boolean removeOnibus (Onibus o){
-		for (int i = 0; i < onibus.size(); i++) {
-			if (onibus.get(i).equals(o))
-				onibus.remove(i);
-				return true;
-		}
-		
-		return false;
+	public void removeOnibus(Onibus o) throws IllegalArgumentException, SQLException{
+		busDAO.deletar(o);
 	}
 	
-	public List<Onibus> getOnibus (){
-		return this.onibus;
+	public List<Onibus> getOnibus() throws SQLException{
+		return busDAO.listarTodas();
 	}
 	
-	public String getOnibusId (Onibus o){
-		return o.getIdentificador();
+	public String getOnibusId(Onibus o) throws IllegalArgumentException, SQLException{
+		return busDAO.recuperar(o.getIdentificador()).getIdentificador();
 	}
 	
-	public Onibus getOnibusPorId (String id) throws OnibusNaoEncontradoException{
-		for (int i = 0; i < onibus.size(); i++) {
-			if (onibus.get(i).getIdentificador().equals(id)){
-				return onibus.get(i);
-			}
-		}
-		
-		throw new OnibusNaoEncontradoException();
+	public Onibus getOnibusPorId(String id) throws IllegalArgumentException, SQLException {
+		return busDAO.recuperar(id);
 	}
 
 }

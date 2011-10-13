@@ -31,22 +31,22 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public boolean adicionarOnibus(Onibus o) {
-		return os.addOnibus(o);
+	public void adicionarOnibus(Onibus o) throws IllegalArgumentException, SQLException {
+		os.addOnibus(o);
 	}
 
 	@Override
-	public boolean removerOnibus(Onibus o) {
-		return os.removeOnibus(o);
+	public void removerOnibus(Onibus o) throws IllegalArgumentException, SQLException {
+		os.removeOnibus(o);
 	}
 
 	@Override
-	public boolean adicionarEmpresa(Cidade c, Empresa empr) {
+	public boolean adicionarEmpresa(Cidade c, Empresa empr) throws IllegalArgumentException, SQLException {
 		return cs.adicionaEmpresa(c, empr);
 	}
 
 	@Override
-	public boolean removerEmpresa(Cidade c, Empresa empr) {
+	public boolean removerEmpresa(Cidade c, Empresa empr) throws IllegalArgumentException, SQLException {
 		return cs.removeEmpresa(c, empr);
 	}
 

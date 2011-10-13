@@ -5,14 +5,14 @@ public class Onibus {
 	//Não coloquei integer, pois existem onibus com letras, exemplo: 093A
 	private String identificador;
 	private int capacidade;
-	private int rotaId;
+	private String rotaId;
 	
 	public Onibus (String identificador){
 		validaIdentificador(identificador);
 		this.identificador = identificador;
 	}
 	
-	public Onibus (String identificador, int capacidade, int rotaId){
+	public Onibus (String identificador, int capacidade, String rotaId){
 		validaIdentificador(identificador);
 		validaCapacidade(capacidade);
 		validaRotaId(rotaId);
@@ -21,12 +21,11 @@ public class Onibus {
 		this.rotaId = rotaId;
 	}
 
-	public int getRotaId() {
+	public String getRotaId() {
 		return rotaId;
 	}
 
-	public void setRotaId(int rotaId) {
-		this.rotaId = rotaId;
+	public void setRotaId(String rotaId) {
 		this.rotaId = rotaId;
 	}
 
@@ -62,8 +61,8 @@ public class Onibus {
 			throw new IllegalArgumentException("Capacidade invalida");
 	}
 	
-	private void validaRotaId(int rotaId){
-		if (rotaId < 0)
+	private void validaRotaId(String rotaId){
+		if (rotaId == null || rotaId.trim().isEmpty())
 			throw new IllegalArgumentException("ID de rota invalida");
 	}
 }

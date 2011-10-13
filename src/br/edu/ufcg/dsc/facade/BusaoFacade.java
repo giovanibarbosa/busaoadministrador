@@ -13,8 +13,8 @@ public class BusaoFacade{
 		private CidadeService cs;
 	
 		public BusaoFacade() throws SQLException{
-			rs = new RotaService();
-			cs = new CidadeService();
+			rs = RotaService.getInstance();
+			cs = CidadeService.getInstance();
 		}
 
 		//Aqui tem que especificar mais Julio. Tu pegar valor de que tabela ? So de Rota ? 
@@ -60,8 +60,8 @@ public class BusaoFacade{
         	return null;
         }
 
-        public String obterCidade(int idCidade) {
-        	return cs.getCidadePorId(idCidade);
+        public String obterCidade(String idCidade) throws IllegalArgumentException, SQLException {
+        	return cs.getCidadePorId(idCidade).toString();
         }
         
 }

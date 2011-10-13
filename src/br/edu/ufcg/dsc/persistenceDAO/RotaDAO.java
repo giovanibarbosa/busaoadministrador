@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Horario;
+import br.edu.ufcg.dsc.bean.Onibus;
+import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
 import br.edu.ufcg.dsc.util.Tempo;
@@ -17,9 +19,9 @@ public class RotaDAO {
 	private static RotaDAO instancia;
 
 	public RotaDAO() throws SQLException {
-		
+
 		try {
-			conexao = new ConnectionFactory().getConnection();			
+			conexao = new ConnectionFactory().getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +55,7 @@ public class RotaDAO {
 		st.setInt(9, rota.getHorario().getHoraTermino().getHora());
 		st.setInt(10, rota.getHorario().getHoraTermino().getMinutos());
 		st.setString(11, rota.getUrlRota());
+		st.setInt(12, rota.getNumeroDoOnibus());
 
 		st.execute();
 		st.close();
@@ -65,8 +68,8 @@ public class RotaDAO {
 					"O identificador da Rota deve ser valido");
 
 		String sql = "select (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
-				+ "from rota where id=?";
+				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, "
+				+ "urlRota, numeroDoOnibus) from rota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Rota rota = null;
 
@@ -79,7 +82,6 @@ public class RotaDAO {
 		st.close();
 		return rota;
 	}
-	
 
 	private List<Rota> resultSetToList(ResultSet rs) throws SQLException {
 		List<Rota> rotas = new ArrayList<Rota>();
@@ -94,7 +96,8 @@ public class RotaDAO {
 									rs.getInt("minutoInicio")), new Tempo(
 									rs.getInt("horaTermino"),
 									rs.getInt("minutoTermino"))),
-					rs.getInt("empresaId"), rs.getString("urlRota"));
+					rs.getInt("empresaId"), rs.getString("urlRota"),
+					rs.getInt("numeroDoOnibus"));
 			rotas.add(rota);
 		}
 		return rotas;
@@ -107,7 +110,7 @@ public class RotaDAO {
 
 		String sql = "update rota set id = ?, cor = ?, numeroVisualizacao = ?, emrpesaId = ?, "
 				+ "diferencaEntreOnibus = ?, tempoPercusoTotal = ?, horaInicio = ?, minutoInicio = ?, "
-				+ "horaTermino = ?, minutoTermino = ?, urlRota = ? where id = ?";
+				+ "horaTermino = ?, minutoTermino = ?, urlRota = ?, numeroDoOnibus=? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rotaAtualizada.getIdentificador());
@@ -121,8 +124,9 @@ public class RotaDAO {
 		st.setInt(9, rotaAtualizada.getHorario().getHoraTermino().getHora());
 		st.setInt(10, rotaAtualizada.getHorario().getHoraTermino().getMinutos());
 		st.setString(11, rotaAtualizada.getUrlRota());
-		st.setString(12, rota.getIdentificador());
-		
+		st.setInt(12, rotaAtualizada.getNumeroDoOnibus());
+		st.setString(13, rota.getIdentificador());
+
 		st.executeUpdate();
 		st.close();
 	}
@@ -136,7 +140,7 @@ public class RotaDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rota.getIdentificador());
-		
+
 		st.execute();
 		st.close();
 	}
@@ -146,30 +150,137 @@ public class RotaDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 		return resultSetToList(st.executeQuery());
 	}
-	
-	
-	public List<String> resultSetToListSearch(ResultSet rs) throws SQLException {
-		
-		List<String> rotas = new ArrayList<String>();
-		Rota rota = null;
-		
-		//Giovani, aqui eu quero que pesquise o q tem identificador parecido e retorne.
-		while (rs.next()){
-			
-			//rota = new Rota (rs.getString("id").equals(anObject));
-			
-			//rotas.add(rota.getIdentificador());
-		}
-		
-		return rotas;
-	}
-	
-	
-	//Pra pesquisar por rota com identificador igual ou parecido
-	public List<String> pesquisaRota (String identificador) throws SQLException {
-		String sql = "select r from rota where r.id=" + identificador;
+
+	public boolean adicionaOnibus(Rota rota, Onibus onibus)
+			throws IllegalArgumentException, SQLException {
+		if (rota == null || onibus == null)
+			throw new IllegalArgumentException("Empresa ou Cidade inválida");
+		String sql = "update onibus set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
-		return resultSetToListSearch(st.executeQuery());
+
+		if (!recuperaOnibuss(rota).contains(onibus)) {
+			st.setString(1, rota.getIdentificador());
+			st.setString(2, onibus.getIdentificador());
+			st.executeUpdate();
+			st.close();
+			return true;
+		}
+
+		st.close();
+		return false;
+	}
+
+	public List<Onibus> recuperaOnibuss(Rota rota) throws SQLException,
+			IllegalArgumentException {
+		if (rota == null)
+			throw new IllegalArgumentException("Rota inválida");
+		String sql = "select * from onibus where rotaId=?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+
+		st.setString(1, rota.getIdentificador());
+		ResultSet rs = st.executeQuery();
+		List<Onibus> onibuss = resultSetToOnibusList(rs);
+
+		st.close();
+		return onibuss;
+	}
+
+	private List<Onibus> resultSetToOnibusList(ResultSet rs)
+			throws SQLException {
+		List<Onibus> onibuss = new ArrayList<Onibus>();
+		Onibus onibus = null;
+
+		while (rs.next()) {
+			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"),
+					rs.getString("rotaId"));
+			onibuss.add(onibus);
+		}
+		return onibuss;
+	}
+
+	public boolean removeOnibus(Onibus onibus, Rota rota)
+			throws IllegalArgumentException, SQLException {
+		if (onibus == null || rota == null)
+			throw new IllegalArgumentException("Onibus ou Rota inválida");
+		String sql = "update onibus set rotaId=? where id=?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+
+		if (recuperaOnibuss(rota).contains(onibus)) {
+			st.setObject(1, null);
+			st.setString(2, onibus.getIdentificador());
+			st.executeUpdate();
+			st.close();
+			return true;
+		}
+
+		st.close();
+		return false;
+	}
+
+	public boolean adicionaPonto(PontoDeRota ponto, Rota rota)
+			throws IllegalArgumentException, SQLException {
+		if (rota == null || ponto == null)
+			throw new IllegalArgumentException("Rota ou Ponto inválido");
+		String sql = "update pontoDeRota set rotaId=? where id=?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+
+		if (!recuperaPontos(rota).contains(rota)) {
+			st.setString(1, rota.getIdentificador());
+			st.setInt(2, ponto.getId());
+			st.executeUpdate();
+			st.close();
+			return true;
+		}
+
+		st.close();
+		return false;
+	}
+
+	private List<PontoDeRota> recuperaPontos(Rota rota) throws SQLException {
+		if (rota == null)
+			throw new IllegalArgumentException("Rota inválida");
+		String sql = "select * from pontoDeRota where rotaId=?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+
+		st.setString(1, rota.getIdentificador());
+		ResultSet rs = st.executeQuery();
+		List<PontoDeRota> pontos = resultSetToPontoList(rs);
+
+		st.close();
+		return pontos;
+	}
+
+	private List<PontoDeRota> resultSetToPontoList(ResultSet rs)
+			throws SQLException {
+		List<PontoDeRota> pontos = new ArrayList<PontoDeRota>();
+		PontoDeRota pontoDeRota = null;
+
+		while (rs.next()) {
+			pontoDeRota = new PontoDeRota(rs.getInt("id"),
+					rs.getDouble("longitude"), rs.getDouble("latitude"),
+					rs.getString("rotaId"));
+			pontos.add(pontoDeRota);
+		}
+		return pontos;
+	}
+
+	public boolean removePonto(PontoDeRota ponto, Rota rota)
+			throws IllegalArgumentException, SQLException {
+		if (ponto == null || rota == null)
+			throw new IllegalArgumentException("Ponto ou Rota inválida");
+		String sql = "update pontoDeRota set rotaId=? where id=?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+
+		if (recuperaPontos(rota).contains(ponto)) {
+			st.setObject(1, null);
+			st.setInt(2, ponto.getId());
+			st.executeUpdate();
+			st.close();
+			return true;
+		}
+
+		st.close();
+		return false;
 	}
 
 }

@@ -1,21 +1,24 @@
 package br.edu.ufcg.dsc.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Rota;
+import br.edu.ufcg.dsc.persistenceDAO.EmpresaDAO;
 
 public class EmpresaService {
 
 	private static EmpresaService instanciaUnica;
+	private EmpresaDAO empDAO;
 	private List<Empresa> empresas;
 	
-	public EmpresaService () {
-		this.empresas = new ArrayList<Empresa>();
+	private EmpresaService () throws SQLException {
+		empDAO = EmpresaDAO.getInstance();
 	}
 	
-	public static EmpresaService getInstance() {
+	public static EmpresaService getInstance() throws SQLException {
 	
 		if (instanciaUnica == null){
 			EmpresaService es = new EmpresaService();

@@ -12,6 +12,7 @@ public class Rota {
 	private List<Onibus> onibusParticipantes;
 	private List<Ponto> pontos;
 	private Horario horario;
+	private int numeroDoOnibus;	
 	private String urlRota;
 
 	
@@ -79,7 +80,7 @@ public class Rota {
 	}
 
 	public Rota(String identificador, String cor, int numeroVisualizacao,
-			Horario horario, int empresaId, String urlRota) {
+			Horario horario, int empresaId, String urlRota, int numeroDoOnibus) {
 		validaId(identificador);
 		validaHorario(horario);
 		validaCor(cor);
@@ -92,6 +93,7 @@ public class Rota {
 		this.horario = horario;
 		this.empresaId = empresaId;
 		this.urlRota = urlRota;
+		this.numeroDoOnibus = numeroDoOnibus;
 	}
 
 	@Override
@@ -99,6 +101,14 @@ public class Rota {
 		return "Identificador: " + getIdentificador() + ". Cor: "
 				+ ". Número de visualização: " + getNumeroVisualizacao()
 				+ getHorario();
+	}
+	
+	public int getNumeroDoOnibus() {
+		return numeroDoOnibus;
+	}
+
+	public void setNumeroDoOnibus(int numeroDoOnibus) {
+		this.numeroDoOnibus = numeroDoOnibus;
 	}
 
 	public String getUrlRota() {

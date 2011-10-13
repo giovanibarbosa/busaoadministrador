@@ -14,13 +14,13 @@ public interface BusaoAdministradorFacadeIF {
 	
 	public void removerCidade(Cidade c) throws IllegalArgumentException, SQLException;
 	
-	public boolean adicionarOnibus(Onibus o);
+	public void adicionarOnibus(Onibus o) throws IllegalArgumentException, SQLException;
 	
-	public boolean removerOnibus(Onibus o);
+	public void removerOnibus(Onibus o) throws IllegalArgumentException, SQLException;
 	
-	public boolean adicionarEmpresa (Cidade c, Empresa empr);
+	public boolean adicionarEmpresa (Cidade c, Empresa empr) throws IllegalArgumentException, SQLException;
 	
-	public boolean removerEmpresa (Cidade c, Empresa empr);
+	public boolean removerEmpresa (Cidade c, Empresa empr) throws IllegalArgumentException, SQLException;
 	
 	public boolean alterarRota (Empresa emp, Rota r);
 	

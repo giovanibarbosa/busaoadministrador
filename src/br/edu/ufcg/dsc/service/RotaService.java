@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Ponto;
+import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceDAO.RotaDAO;
 import br.edu.ufcg.dsc.util.Tempo;
@@ -13,12 +14,11 @@ import br.edu.ufcg.dsc.util.Tempo;
 public class RotaService {
 
 	private static RotaService instanciaUnica;
-	//?????????
 	private RotaDAO rd;
 	private final Ponto INTEGRACAO = new Ponto (-7.219459, -35.889641);
 	private final int MILISSEGUNDOS_PARA_MINUTO = 60000;
 	
-	public RotaService() throws SQLException{
+	private RotaService() throws SQLException{
 		rd = RotaDAO.getInstance();
 	}
 	
@@ -45,60 +45,32 @@ public class RotaService {
 		return rd.listarTodas();
 	}
 	
-	//Ver como fica isso no DAO
-	public boolean adicionaOnibusNaRota (Rota r, Onibus o){
-		
-		if (!r.getOnibusParticipantes().contains(o)){
-			r.getOnibusParticipantes().add(o);
-			return true;
-		}
-		
-		return false;
+	public boolean adicionaOnibusNaRota(Rota r, Onibus o)
+			throws IllegalArgumentException, SQLException{
+		return rd.adicionaOnibus(r, o);
 	}
 	
-	//Ver como fica isso no DAO
-	public boolean removeOnibusDaRota (Rota r, Onibus o){
-		
-		for (int i = 0; i < r.getOnibusParticipantes().size(); i++) {
-			if (r.getOnibusParticipantes().get(i).equals(o)){
-				r.getOnibusParticipantes().remove(i);
-				return true;
-			}
-		}
-	
-		return false;
+	public boolean removeOnibusDaRota(Rota r, Onibus o)
+			throws IllegalArgumentException, SQLException{
+		return rd.removeOnibus(o, r);
 	}
 
-	//Ver como fica isso no DAO
-	public boolean adicionaPontoRota (Rota r, Ponto p){
-		
-		if (!r.getPontos().contains(p)){
-			r.getPontos().add(p);
-			return true;
-		}
-		
-		return false;
+	public boolean adicionaPontoRota(Rota r, PontoDeRota p)
+			throws IllegalArgumentException, SQLException{
+		return rd.adicionaPonto(p, r);
 	}
 	
-	//Ver como fica isso no DAO
-	public boolean removePontoDaRota (Rota r, Ponto p){
-		
-		for (int i = 0; i < r.getPontos().size(); i++) {
-			if (r.getPontos().get(i).equals(p)){
-				r.getPontos().remove(i);
-				return true;
-			}
-		}
-	
-		return false;
+	public boolean removePontoDaRota(Rota r, PontoDeRota p)
+			throws IllegalArgumentException, SQLException{
+		return rd.removePonto(p, r);
 	}
 	
-	//Ve isso aqui direitinho. Tenho duvida
-	@SuppressWarnings("unchecked")
+	//TODO
 	public List<String> pesquisaRota (String identificador) throws SQLException{
-		return (List<String>) rd.pesquisaRota(identificador);
+		return null;
 	}
 	
+	//TODO
 	public List<Ponto> getPontos(String idRota) throws IllegalArgumentException, SQLException{
 		Rota r = new Rota();
 		r = rd.recuperar(idRota);

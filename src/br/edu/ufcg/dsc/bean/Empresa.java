@@ -87,17 +87,26 @@ public class Empresa {
 		if (id < 0 )
 			throw new IllegalArgumentException("Identificador de empresa invalido");
 	}
+	
 	private void validaNome(String nome){
 		if (nome == null || nome.trim().isEmpty())
 			throw new IllegalArgumentException("Nome de empresa invalido");
 	}
+	
 	private void validaAnoFundacao(int anoFundacao){
 		if (anoFundacao < 1900 )
 			throw new IllegalArgumentException("Ano de fundacao invalido");
 	}
+	
 	private void validaIdCidade(int cidadeId){
 		if (cidadeId < 0 )
 			throw new IllegalArgumentException("Identificador de cidade invalido");
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Empresa)) return false;
+		Empresa emp = (Empresa) obj;
+		return emp.getIdentificador() == getIdentificador();
+	}
 }

@@ -36,7 +36,7 @@ public class OnibusDAO {
 
 		st.setString(1, onibus.getIdentificador());
 		st.setInt(2, onibus.getCapacidade());
-		st.setInt(3, onibus.getRotaId());
+		st.setString(3, onibus.getRotaId());
 
 		st.execute();
 		st.close();
@@ -45,7 +45,8 @@ public class OnibusDAO {
 	public Onibus recuperar(String identificador) throws SQLException,
 			IllegalArgumentException {
 		if (identificador == null || !(identificador.matches("[0-9]+")))
-			throw new IllegalArgumentException("O identificador do Onibus deve ser valido");
+			throw new IllegalArgumentException(
+					"O identificador do Onibus deve ser valido");
 
 		String sql = "select (id, capacidade, rotaId) from onibus where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
@@ -66,7 +67,8 @@ public class OnibusDAO {
 		Onibus onibus = null;
 
 		while (rs.next()) {
-			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"), rs.getInt("rotaId"));
+			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"),
+					rs.getString("rotaId"));
 			onibuss.add(onibus);
 		}
 		return onibuss;
@@ -75,14 +77,15 @@ public class OnibusDAO {
 	public void atualizar(Onibus onibus, Onibus onibusAtualizada)
 			throws SQLException, IllegalArgumentException {
 		if (onibus == null || onibusAtualizada == null)
-			throw new IllegalArgumentException("O Onibus nao pode ser atualizado");
+			throw new IllegalArgumentException(
+					"O Onibus nao pode ser atualizado");
 
 		String sql = "update onibus set id = ?, capacidade = ?, rotaId = ? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, onibusAtualizada.getIdentificador());
 		st.setInt(2, onibusAtualizada.getCapacidade());
-		st.setInt(3, onibusAtualizada.getRotaId());
+		st.setString(3, onibusAtualizada.getRotaId());
 		st.setString(4, onibus.getIdentificador());
 
 		st.executeUpdate();

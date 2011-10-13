@@ -111,32 +111,44 @@ public class Cidade {
 
 	@Override
 	public String toString() {
-		return getNome() + " - " + getEstado() + ". Tarifa: " + getValorTarifa() + ". "
-				+ getPonto();
+		return getNome() + " - " + getEstado() + ". Tarifa: "
+				+ getValorTarifa() + ". " + getPonto();
 	}
-	
-	private void validaNome(String nome){
+
+	private void validaNome(String nome) {
 		if (nome == null || nome.trim().isEmpty())
 			throw new IllegalArgumentException("Nome de cidade invalido");
 	}
-	
-	private void validaEstado(String estado){
+
+	private void validaEstado(String estado) {
 		if (estado == null || estado.trim().isEmpty())
 			throw new IllegalArgumentException("Estado invalido");
-		
+
 	}
-	private void validaTarifa(double valorTarifa){
+
+	private void validaTarifa(double valorTarifa) {
 		if (valorTarifa <= 0)
-			throw new IllegalArgumentException("Valor de tarifa menor ou igual a zero");
+			throw new IllegalArgumentException(
+					"Valor de tarifa menor ou igual a zero");
 	}
-	private void validaId(int id){
+
+	private void validaId(int id) {
 		if (id < 0)
-			throw new IllegalArgumentException("Identificacao de cidade invalida");
+			throw new IllegalArgumentException(
+					"Identificacao de cidade invalida");
 	}
-	private void validaPonto(Ponto ponto){
+
+	private void validaPonto(Ponto ponto) {
 		if (ponto == null)
 			throw new IllegalArgumentException("Ponto invalido");
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Cidade))
+			return false;
+		Cidade cd = (Cidade) obj;
+		return cd.getIdentificacao() == getIdentificacao()
+				&& cd.getNome() == getNome();
+	}
 }
