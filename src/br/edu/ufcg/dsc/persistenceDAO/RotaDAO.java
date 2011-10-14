@@ -236,7 +236,7 @@ public class RotaDAO {
 		return false;
 	}
 
-	private List<PontoDeRota> recuperaPontos(Rota rota) throws SQLException {
+	public List<PontoDeRota> recuperaPontos(Rota rota) throws SQLException {
 		if (rota == null)
 			throw new IllegalArgumentException("Rota inválida");
 		String sql = "select * from pontoDeRota where rotaId=?";

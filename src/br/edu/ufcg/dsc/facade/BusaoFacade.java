@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Ponto;
+import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.service.CidadeService;
 import br.edu.ufcg.dsc.service.RotaService;
 
@@ -29,7 +30,7 @@ public class BusaoFacade{
         	return rs.pesquisaRota(nome);
         }
 
-        public List<Ponto> obterPontos(String idRota) throws IllegalArgumentException, SQLException {
+        public List<PontoDeRota> obterPontos(String idRota) throws IllegalArgumentException, SQLException {
         	return rs.getPontos(idRota);
         }
 
