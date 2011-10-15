@@ -91,7 +91,7 @@ public class RotaService {
 	// Aqui a gente tem que extrair pontos la do arquivo .kml
 	public List<Ponto> extrairPontos(String iframe) {
 		// TODO
-		return null;
+		return new ArrayList<Ponto>();
 	}
 
 	public String getTodosHorario(String idRota)

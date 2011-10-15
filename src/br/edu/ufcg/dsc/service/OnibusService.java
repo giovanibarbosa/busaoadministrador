@@ -37,7 +37,7 @@ public class OnibusService {
 		return busDAO.listarTodas();
 	}
 	
-	public String getOnibusId(Onibus o) throws IllegalArgumentException, SQLException{
+	public String getIdOnibus(Onibus o) throws IllegalArgumentException, SQLException{
 		return busDAO.recuperar(o.getIdentificador()).getIdentificador();
 	}
 	

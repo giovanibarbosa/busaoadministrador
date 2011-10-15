@@ -34,7 +34,7 @@ public class Empresa {
 	@Override
 	public String toString() {
 		return "Identificador: " + getIdentificador() + ". Nome: " + getNome()
-				+ ". Ano de fundação: " + getAnoFundacao();
+				+ ". Ano de fundação: " + getAnoFundacao()+ ". Identificador da Cidade: " + getCidadeId();
 	}
 
 	public List<Rota> getRotas() {

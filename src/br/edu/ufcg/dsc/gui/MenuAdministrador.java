@@ -10,6 +10,8 @@
  */
 package br.edu.ufcg.dsc.gui;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -47,28 +49,48 @@ public class MenuAdministrador extends javax.swing.JFrame {
         cidadeButton.setText("Cidade");
         cidadeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cidadeButtonActionPerformed(evt);
+                try {
+					cidadeButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
         rotaButton.setText("Rota");
         rotaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rotaButtonActionPerformed(evt);
+                try {
+					rotaButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
         empresaButton.setText("Empresa");
         empresaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empresaButtonActionPerformed(evt);
+                try {
+					empresaButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
         onibusButton.setText("Onibus");
         onibusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onibusButtonActionPerformed(evt);
+                try {
+					onibusButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         
@@ -140,28 +162,28 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void cidadeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeButtonActionPerformed
+    private void cidadeButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_cidadeButtonActionPerformed
     	MenuCidade cidade = new MenuCidade();
     	cidade.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cidade.setVisible(true);
         dispose();
     }//GEN-LAST:event_cidadeButtonActionPerformed
 
-    private void empresaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empresaButtonActionPerformed
+    private void empresaButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_empresaButtonActionPerformed
     	MenuEmpresa empresa = new MenuEmpresa();
     	empresa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         empresa.setVisible(true);
         dispose();
     }//GEN-LAST:event_empresaButtonActionPerformed
 
-    private void rotaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotaButtonActionPerformed
+    private void rotaButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_rotaButtonActionPerformed
     	MenuRota rota = new MenuRota();
     	rota.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         rota.setVisible(true);
         dispose();
     }//GEN-LAST:event_rotaButtonActionPerformed
     
-    private void onibusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotaButtonActionPerformed
+    private void onibusButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_rotaButtonActionPerformed
     	MenuOnibus onibus = new MenuOnibus();
     	onibus.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         onibus.setVisible(true);

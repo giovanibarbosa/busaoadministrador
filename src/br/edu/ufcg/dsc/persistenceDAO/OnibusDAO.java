@@ -44,8 +44,8 @@ public class OnibusDAO {
 
 	public Onibus recuperar(String identificador) throws SQLException,
 			IllegalArgumentException {
-		if (identificador == null || !(identificador.matches("[0-9]+")))
-			throw new IllegalArgumentException(
+		if (identificador == null)
+				throw new IllegalArgumentException(
 					"O identificador do Onibus deve ser valido");
 
 		String sql = "select (id, capacidade, rotaId) from onibus where id=?";
@@ -67,8 +67,12 @@ public class OnibusDAO {
 		Onibus onibus = null;
 
 		while (rs.next()) {
+			if (rs.getString("rotaId") == null){
+				onibus = new Onibus(rs.getString("id"));
+			}else{
 			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"),
 					rs.getString("rotaId"));
+			}
 			onibuss.add(onibus);
 		}
 		return onibuss;

@@ -114,7 +114,7 @@ public class MenuAddUsuario extends javax.swing.JFrame {
     private void salvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarButtonActionPerformed
         //verificar se e possivel add usuario;
 
-        JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso.");
+        JOptionPane.showMessageDialog(null, "Usuario adicionado com sucesso.");
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_salvarButtonActionPerformed
@@ -124,7 +124,7 @@ public class MenuAddUsuario extends javax.swing.JFrame {
         
         Object[] options2 = { "Sim", "Nao" };
         
-        int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que sair do processo de inclusão de novo Usuário ?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]); 
+        int resposta = JOptionPane.showOptionDialog(null, "Tem certeza que sair do processo de inclusao de novo Usuario ?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]); 
         
         if (resposta == 0){
              new Login().setVisible(true);

@@ -1,7 +1,6 @@
 package br.edu.ufcg.dsc.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Empresa;
@@ -56,7 +55,14 @@ public class EmpresaService {
 		return false;
 	}
 	
-	public List<Empresa> getEmpresas(){
-		return empresas;
+	public List<Empresa> getEmpresas() throws SQLException{
+		return empDAO.listarTodas();
 	}
+
+	public Empresa getEmpresaId(int id) throws IllegalArgumentException, SQLException {
+		return empDAO.recuperar(String.valueOf(id));
+		
+	}
+	
+
 }

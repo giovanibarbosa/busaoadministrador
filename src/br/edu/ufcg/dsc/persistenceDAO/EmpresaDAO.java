@@ -68,7 +68,7 @@ public class EmpresaDAO {
 
 		while (rs.next()) {
 			empresa = new Empresa(rs.getInt("id"), rs.getString("nome"),
-					rs.getInt("anoDeFuncadao"), rs.getInt("cidadeId"));
+					rs.getInt("anoDeFundacao"), rs.getInt("cidadeId"));
 			empresas.add(empresa);
 		}
 		return empresas;
@@ -111,5 +111,7 @@ public class EmpresaDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 		return resultSetToList(st.executeQuery());
 	}
+	
+	
 
 }

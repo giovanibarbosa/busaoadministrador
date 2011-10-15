@@ -2,7 +2,7 @@ package br.edu.ufcg.dsc.bean;
 
 public class Onibus {
 
-	//Não coloquei integer, pois existem onibus com letras, exemplo: 093A
+	
 	private String identificador;
 	private int capacidade;
 	private String rotaId;
@@ -26,6 +26,7 @@ public class Onibus {
 	}
 
 	public void setRotaId(String rotaId) {
+		validaRotaId(rotaId);
 		this.rotaId = rotaId;
 	}
 
