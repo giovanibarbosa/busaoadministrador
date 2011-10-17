@@ -12,7 +12,7 @@ import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
-import br.edu.ufcg.dsc.util.Tempo;
+
 
 public class RotaDAO {
 	private Connection conexao;
@@ -45,17 +45,16 @@ public class RotaDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rota.getIdentificador());
-		st.setString(2, rota.getCor());
-		st.setInt(3, rota.getNumeroVisualizacao());
-		st.setInt(4, rota.getEmpresaId());
+		st.setString(2, rota.getVia());
+		st.setString(3, rota.getCor());
+		st.setInt(4, rota.getNumeroVisualizacao());
 		st.setInt(5, rota.getHorario().getDiferencaEntreOnibus());
 		st.setInt(6, rota.getHorario().getTempoPercursoTotal());
-		st.setInt(7, rota.getHorario().getHoraInicio().getHora());
-		st.setInt(8, rota.getHorario().getHoraInicio().getMinutos());
-		st.setInt(9, rota.getHorario().getHoraTermino().getHora());
-		st.setInt(10, rota.getHorario().getHoraTermino().getMinutos());
-		st.setString(11, rota.getUrlRota());
-		st.setInt(12, rota.getNumeroDoOnibus());
+		st.setDate(7, rota.getHorario().getHoraInicio());
+		st.setDate(8, rota.getHorario().getHoraTermino());
+		st.setString(9, rota.getUrlRota());
+		st.setInt(10, rota.getEmpresaId());
+		st.setInt(11, rota.getNumeroDoOnibus());
 
 		st.execute();
 		st.close();
@@ -91,13 +90,12 @@ public class RotaDAO {
 			rota = new Rota(rs.getString("id"), rs.getString("cor"),
 					rs.getInt("numeroVisualizacao"), new Horario(
 							rs.getInt("diferencaEntreOnibus"),
-							rs.getInt("tempoPercursoTotal"), new Tempo(
-									rs.getInt("horaInicio"),
-									rs.getInt("minutoInicio")), new Tempo(
-									rs.getInt("horaTermino"),
-									rs.getInt("minutoTermino"))),
+							rs.getInt("tempoPercursoTotal"), 
+									rs.getDate("horaInicio"),
+									rs.getDate("horaTermino")
+									),
 					rs.getInt("empresaId"), rs.getString("urlRota"),
-					rs.getInt("numeroDoOnibus"));
+					rs.getInt("numeroDoOnibus"), rs.getString("via"));
 			rotas.add(rota);
 		}
 		return rotas;
@@ -119,13 +117,11 @@ public class RotaDAO {
 		st.setInt(4, rotaAtualizada.getEmpresaId());
 		st.setInt(5, rotaAtualizada.getHorario().getDiferencaEntreOnibus());
 		st.setInt(6, rotaAtualizada.getHorario().getTempoPercursoTotal());
-		st.setInt(7, rotaAtualizada.getHorario().getHoraInicio().getHora());
-		st.setInt(8, rotaAtualizada.getHorario().getHoraInicio().getMinutos());
-		st.setInt(9, rotaAtualizada.getHorario().getHoraTermino().getHora());
-		st.setInt(10, rotaAtualizada.getHorario().getHoraTermino().getMinutos());
-		st.setString(11, rotaAtualizada.getUrlRota());
-		st.setInt(12, rotaAtualizada.getNumeroDoOnibus());
-		st.setString(13, rota.getIdentificador());
+		st.setDate(7, rotaAtualizada.getHorario().getHoraInicio());
+		st.setDate(8, rotaAtualizada.getHorario().getHoraTermino());
+		st.setString(9, rotaAtualizada.getUrlRota());
+		st.setInt(10, rotaAtualizada.getNumeroDoOnibus());
+		st.setString(11, rota.getIdentificador());
 
 		st.executeUpdate();
 		st.close();

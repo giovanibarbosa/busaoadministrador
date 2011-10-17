@@ -16,7 +16,7 @@ import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.facade.BusaoAdministradorFacade;
 import br.edu.ufcg.dsc.service.RotaService;
-import br.edu.ufcg.dsc.util.Tempo;
+import java.sql.Date;
 
 import java.awt.HeadlessException;
 import java.sql.SQLException;
@@ -300,7 +300,9 @@ public class MenuRota extends javax.swing.JFrame {
         	buss.add((Onibus) select[i]);
         }
         
-        facade.cadastrarRota(empresa, new Rota(id, cor, buss, facade.extrairRotas(link), new Horario(intervalo,tempoTotal,new Tempo(horaInicial, minutoInicial),new Tempo(horaFinal, minutoFinal))));
+        Date tInicio = new Date(tempoInicial * 1000);
+        Date tFim = new Date(tempoFinal * 1000);
+        facade.cadastrarRota(empresa, new Rota(id, cor, buss, facade.extrairRotas(link), new Horario(intervalo,tempoTotal,tInicio, tFim), ""));
        
         JOptionPane.showMessageDialog(null, "Rota criada com sucesso");
         

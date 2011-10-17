@@ -9,7 +9,7 @@ import br.edu.ufcg.dsc.bean.Ponto;
 import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceDAO.RotaDAO;
-import br.edu.ufcg.dsc.util.Tempo;
+import java.sql.Date;
 
 public class RotaService {
 
@@ -122,7 +122,7 @@ public class RotaService {
 		r = rd.recuperar(idRota);
 
 		// Transformar tudo para minutos
-		int horaInicial = (r.getHorario().getHoraInicio().getHora() * 60)
+		int horaInicial = (r.getHorario().getHoraInicio(). * 60)
 				+ r.getHorario().getHoraInicio().getMinutos();
 
 		// Pega hora do sistema e transfere pra minutos
@@ -135,7 +135,7 @@ public class RotaService {
 		return ((horaAtual - horaInicial) % tempoPercurso);
 	}
 
-	public Tempo calcularTodosHorarios(Rota r) {
+	public Date calcularTodosHorarios(Rota r) {
 		// TODO
 		return null;
 	}

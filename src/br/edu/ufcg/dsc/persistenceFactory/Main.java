@@ -12,7 +12,6 @@ import br.edu.ufcg.dsc.persistenceDAO.CidadeDAO;
 import br.edu.ufcg.dsc.persistenceDAO.EmpresaDAO;
 import br.edu.ufcg.dsc.persistenceDAO.OnibusDAO;
 import br.edu.ufcg.dsc.persistenceDAO.RotaDAO;
-import br.edu.ufcg.dsc.util.Tempo;
 
 public class Main {
 

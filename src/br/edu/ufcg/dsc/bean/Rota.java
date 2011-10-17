@@ -14,6 +14,7 @@ public class Rota {
 	private Horario horario;
 	private int numeroDoOnibus;	
 	private String urlRota;
+	private String via;
 
 	
 	public Rota(){
@@ -23,7 +24,7 @@ public class Rota {
 		this.cor = "Branco";
 	}
 	
-	public Rota(String identificador, List<Ponto> pontos, Horario horario) {
+	public Rota(String identificador, List<Ponto> pontos, Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
@@ -33,10 +34,11 @@ public class Rota {
 		this.onibusParticipantes = new ArrayList<Onibus>();
 		this.numeroVisualizacao = 0;
 		this.cor = "Branco";
+		setVia(via);
 	}
 
 	public Rota(String identificador, List<Onibus> onibusParticipantes,
-			List<Ponto> pontos, Horario horario) {
+			List<Ponto> pontos, Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
@@ -47,10 +49,11 @@ public class Rota {
 		this.horario = horario;
 		this.numeroVisualizacao = 0;
 		this.cor = "Branco";
+		setVia(via);
 	}
 
 	public Rota(String identificador, String cor, List<Ponto> pontos,
-			Horario horario) {
+			Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
@@ -61,11 +64,12 @@ public class Rota {
 		this.horario = horario;
 		this.onibusParticipantes = new ArrayList<Onibus>();
 		this.numeroVisualizacao = 0;
+		setVia(via);
 	}
 
 	public Rota(String identificador, String cor,
 			List<Onibus> onibusParticipantes, List<Ponto> pontos,
-			Horario horario) {
+			Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
@@ -77,10 +81,11 @@ public class Rota {
 		this.onibusParticipantes = onibusParticipantes;
 		this.pontos = pontos;
 		this.horario = horario;
+		setVia(via);
 	}
 
 	public Rota(String identificador, String cor, int numeroVisualizacao,
-			Horario horario, int empresaId, String urlRota, int numeroDoOnibus) {
+			Horario horario, int empresaId, String urlRota, int numeroDoOnibus, String via) {
 		validaId(identificador);
 		validaHorario(horario);
 		validaCor(cor);
@@ -94,6 +99,7 @@ public class Rota {
 		this.empresaId = empresaId;
 		this.urlRota = urlRota;
 		this.numeroDoOnibus = numeroDoOnibus;
+		setVia(via);
 	}
 
 	@Override
@@ -220,6 +226,16 @@ public class Rota {
 	private void validaOnibus(List<Onibus> onibus){
 		if (onibus == null )
 			throw new IllegalArgumentException("Lista de onibus invalida");
+	}
+
+	public void setVia(String via) {
+		if (via == null)
+			throw new IllegalArgumentException("Via nula");
+		this.via = via;
+	}
+
+	public String getVia() {
+		return via;
 	}
 
 }
