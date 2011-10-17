@@ -39,8 +39,8 @@ public class RotaDAO {
 		if (rota == null)
 			throw new IllegalArgumentException("Rota nao foi criada");
 
-		String sql = "insert into rota (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercursoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
+		String sql = "insert into rota (id,via, cor, numeroVisualizacao, diferencaEntreOnibus, "
+				+ "tempoPercursoTotal, horaInicio, horaTermino, urlRota, empresaId, numeroOnibus) "
 				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
@@ -66,9 +66,9 @@ public class RotaDAO {
 			throw new IllegalArgumentException(
 					"O identificador da Rota deve ser valido");
 
-		String sql = "select (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercursoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, "
-				+ "urlRota, numeroDoOnibus) from rota where id=?";
+		String sql = "select (id, via, cor, numeroVisualizacao, diferencaEntreOnibus, "
+				+ "tempoPercursoTotal, horaInicio, horaTermino, "
+				+ "urlRota, empresaId, numeroDoOnibus) from rota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Rota rota = null;
 
@@ -106,22 +106,23 @@ public class RotaDAO {
 		if (rota == null || rotaAtualizada == null)
 			throw new IllegalArgumentException("A Rota nao pode ser atualizada");
 
-		String sql = "update rota set id = ?, cor = ?, numeroVisualizacao = ?, emrpesaId = ?, "
-				+ "diferencaEntreOnibus = ?, tempoPercursoTotal = ?, horaInicio = ?, minutoInicio = ?, "
-				+ "horaTermino = ?, minutoTermino = ?, urlRota = ?, numeroDoOnibus=? where id = ?";
+		String sql = "update rota set id = ?, via = ?, cor = ?, numeroVisualizacao = ?,  "
+				+ "diferencaEntreOnibus = ?, tempoPercursoTotal = ?, horaInicio = ?, "
+				+ "horaTermino = ?, urlRota = ?, empresaId = ?,numeroDoOnibus=? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rotaAtualizada.getIdentificador());
 		st.setString(2, rotaAtualizada.getCor());
-		st.setInt(3, rotaAtualizada.getNumeroVisualizacao());
-		st.setInt(4, rotaAtualizada.getEmpresaId());
-		st.setInt(5, rotaAtualizada.getHorario().getDiferencaEntreOnibus());
-		st.setInt(6, rotaAtualizada.getHorario().getTempoPercursoTotal());
-		st.setDate(7, rotaAtualizada.getHorario().getHoraInicio());
-		st.setDate(8, rotaAtualizada.getHorario().getHoraTermino());
-		st.setString(9, rotaAtualizada.getUrlRota());
-		st.setInt(10, rotaAtualizada.getNumeroDoOnibus());
-		st.setString(11, rota.getIdentificador());
+		st.setString(3, rotaAtualizada.getVia());
+		st.setInt(4, rotaAtualizada.getNumeroVisualizacao());
+		st.setInt(5, rotaAtualizada.getEmpresaId());
+		st.setInt(6, rotaAtualizada.getHorario().getDiferencaEntreOnibus());
+		st.setInt(7, rotaAtualizada.getHorario().getTempoPercursoTotal());
+		st.setDate(8, rotaAtualizada.getHorario().getHoraInicio());
+		st.setDate(9, rotaAtualizada.getHorario().getHoraTermino());
+		st.setString(10, rotaAtualizada.getUrlRota());
+		st.setInt(11, rotaAtualizada.getNumeroDoOnibus());
+		st.setString(12, rota.getIdentificador());
 
 		st.executeUpdate();
 		st.close();

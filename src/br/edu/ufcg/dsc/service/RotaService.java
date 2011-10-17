@@ -122,9 +122,7 @@ public class RotaService {
 		r = rd.recuperar(idRota);
 
 		// Transformar tudo para minutos
-		int horaInicial = (r.getHorario().getHoraInicio(). * 60)
-				+ r.getHorario().getHoraInicio().getMinutos();
-
+		
 		// Pega hora do sistema e transfere pra minutos
 		int horaAtual = (int) (System.currentTimeMillis() / MILISSEGUNDOS_PARA_MINUTO);
 
@@ -132,7 +130,7 @@ public class RotaService {
 		int tempoPercurso = r.getHorario().getTempoPercursoTotal();
 
 		// Resto da Divisao
-		return ((horaAtual - horaInicial) % tempoPercurso);
+		return ((horaAtual - r.getHorario().getHoraInicio().getMinutes()) % tempoPercurso);
 	}
 
 	public Date calcularTodosHorarios(Rota r) {

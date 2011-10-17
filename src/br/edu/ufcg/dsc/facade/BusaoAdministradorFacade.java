@@ -1,6 +1,7 @@
 package br.edu.ufcg.dsc.facade;
 
 import java.awt.Component;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import br.edu.ufcg.dsc.service.CidadeService;
 import br.edu.ufcg.dsc.service.EmpresaService;
 import br.edu.ufcg.dsc.service.OnibusService;
 import br.edu.ufcg.dsc.service.RotaService;
-import br.edu.ufcg.dsc.util.Tempo;
+
 
 
 public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
@@ -81,12 +82,12 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public Tempo calcularTodosHorarios(Rota r) {
+	public Date calcularTodosHorarios(Rota r) {
 		return rs.calcularTodosHorarios(r);
 	}
 
 	@Override
-	public Tempo calculaProximaPassagem(Rota r, Tempo temp) {
+	public Date calculaProximaPassagem(Rota r, Date temp) {
 		// TODO Auto-generated method stub
 		return null;
 	}

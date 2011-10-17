@@ -6,7 +6,7 @@ import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Rota;
-import br.edu.ufcg.dsc.util.Tempo;
+import java.sql.Date;
 
 public interface BusaoAdministradorFacadeIF {
 	
@@ -28,9 +28,9 @@ public interface BusaoAdministradorFacadeIF {
 	
 	public boolean cadastrarRota (Empresa emp, Rota r);
 	
-	public Tempo calculaProximaPassagem (Rota r, Tempo temp);
+	public Date calculaProximaPassagem (Rota r, Date temp);
 	
-	public Tempo calcularTodosHorarios (Rota r);
+	public Date calcularTodosHorarios (Rota r);
 
 	int calculaProximaPassagem(String idRota) throws IllegalArgumentException, SQLException;
 }
