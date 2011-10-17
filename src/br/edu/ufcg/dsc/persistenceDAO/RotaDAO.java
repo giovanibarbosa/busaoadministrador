@@ -40,7 +40,7 @@ public class RotaDAO {
 			throw new IllegalArgumentException("Rota nao foi criada");
 
 		String sql = "insert into rota (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
+				+ "tempoPercursoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, urlRota) "
 				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
@@ -68,7 +68,7 @@ public class RotaDAO {
 					"O identificador da Rota deve ser valido");
 
 		String sql = "select (id, cor, numeroVisualizacao, empresaId, diferencaEntreOnibus, "
-				+ "tempoPercusoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, "
+				+ "tempoPercursoTotal, horaInicio, minutoInicio, horaTermino, minutoTermino, "
 				+ "urlRota, numeroDoOnibus) from rota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Rota rota = null;
@@ -91,7 +91,7 @@ public class RotaDAO {
 			rota = new Rota(rs.getString("id"), rs.getString("cor"),
 					rs.getInt("numeroVisualizacao"), new Horario(
 							rs.getInt("diferencaEntreOnibus"),
-							rs.getInt("tempoPercusoTotal"), new Tempo(
+							rs.getInt("tempoPercursoTotal"), new Tempo(
 									rs.getInt("horaInicio"),
 									rs.getInt("minutoInicio")), new Tempo(
 									rs.getInt("horaTermino"),
@@ -109,7 +109,7 @@ public class RotaDAO {
 			throw new IllegalArgumentException("A Rota nao pode ser atualizada");
 
 		String sql = "update rota set id = ?, cor = ?, numeroVisualizacao = ?, emrpesaId = ?, "
-				+ "diferencaEntreOnibus = ?, tempoPercusoTotal = ?, horaInicio = ?, minutoInicio = ?, "
+				+ "diferencaEntreOnibus = ?, tempoPercursoTotal = ?, horaInicio = ?, minutoInicio = ?, "
 				+ "horaTermino = ?, minutoTermino = ?, urlRota = ?, numeroDoOnibus=? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
