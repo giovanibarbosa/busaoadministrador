@@ -8,8 +8,8 @@ public class ConnectionFactory {
 	private String url, usuario, senha;
 
 	public ConnectionFactory() {
-		url = "sertaonosso.com.br:3306/sertaono_busaoproject";
-		usuario = "sertaono_busao";
+		url = "s43.eatj.com:3307/busaoprojeto";
+		usuario = "busaoprojeto";
 		senha = "inavoigbusao";
 	}
 
