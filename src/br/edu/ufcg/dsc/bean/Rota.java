@@ -38,29 +38,30 @@ public class Rota {
 	}
 
 	public Rota(String identificador, List<Onibus> onibusParticipantes,
-			List<Ponto> pontos, Horario horario, String via) {
+			String urlRota, Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
-		validaOnibus(onibusParticipantes);
+		validaUrl(urlRota);
 		this.identificador = identificador;
 		this.onibusParticipantes = onibusParticipantes;
-		this.pontos = pontos;
 		this.horario = horario;
 		this.numeroVisualizacao = 0;
 		this.cor = "Branco";
+		this.urlRota = urlRota;
 		setVia(via);
 	}
 
-	public Rota(String identificador, String cor, List<Ponto> pontos,
+	public Rota(String identificador, String cor, String urlRota,
 			Horario horario, String via) {
 		validaId(identificador);
 		validaPontos(pontos);
 		validaHorario(horario);
 		validaCor(cor);
+		validaUrl(urlRota);
 		this.identificador = identificador;
 		this.cor = cor;
-		this.pontos = pontos;
+		this.urlRota = urlRota;
 		this.horario = horario;
 		this.onibusParticipantes = new ArrayList<Onibus>();
 		this.numeroVisualizacao = 0;
@@ -68,10 +69,10 @@ public class Rota {
 	}
 
 	public Rota(String identificador, String cor,
-			List<Onibus> onibusParticipantes, List<Ponto> pontos,
+			List<Onibus> onibusParticipantes, String urlRota,
 			Horario horario, String via) {
 		validaId(identificador);
-		validaPontos(pontos);
+		validaUrl(urlRota);
 		validaHorario(horario);
 		validaCor(cor);
 		validaOnibus(onibusParticipantes);
@@ -79,7 +80,7 @@ public class Rota {
 		this.cor = cor;
 		this.numeroVisualizacao = 0;
 		this.onibusParticipantes = onibusParticipantes;
-		this.pontos = pontos;
+		this.urlRota = urlRota;
 		this.horario = horario;
 		setVia(via);
 	}
@@ -201,7 +202,7 @@ public class Rota {
 		
 	}
 	private void validaUrl(String valor){
-		if (valor == null || valor.trim().isEmpty())
+		if (valor == null )
 			throw new IllegalArgumentException("URL invalida");
 		
 	}

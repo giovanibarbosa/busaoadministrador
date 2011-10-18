@@ -1,19 +1,19 @@
 package br.edu.ufcg.dsc.bean;
 
-import java.sql.Date;
+import java.sql.Time;
 
 public class Horario {
 
 	private int diferencaEntreOnibus;
 	private int tempoPercursoTotal;
-	private Date horaInicio;
-	private Date horaTermino;
+	private Time horaInicio;
+	private Time horaTermino;
 
 	public Horario(int diferencaEntreOnibus, int tempoPercursoTotal,
-			Date horaInicio, Date horaTermino) {
+			Time horaInicio, Time horaTermino) {
 		validaDiferenca(diferencaEntreOnibus);
 		validaPercurso(tempoPercursoTotal);
-		validaTempo(horaInicio, horaTermino);
+		valiTimempo(horaInicio, horaTermino);
 		this.diferencaEntreOnibus = diferencaEntreOnibus;
 		this.tempoPercursoTotal = tempoPercursoTotal;
 		this.horaInicio = horaInicio;
@@ -46,21 +46,21 @@ public class Horario {
 		this.tempoPercursoTotal = tempoPercursoTotal;
 	}
 
-	public Date getHoraInicio() {
+	public Time getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(Date horaInicio) {
-		validaTempo(horaInicio, this.horaTermino);
+	public void setHoraInicio(Time horaInicio) {
+		valiTimempo(horaInicio, this.horaTermino);
 		this.horaInicio = horaInicio;
 	}
 
-	public Date getHoraTermino() {
+	public Time getHoraTermino() {
 		return horaTermino;
 	}
 
-	public void setHoraTermino(Date horaTermino) {
-		validaTempo(this.horaInicio, horaTermino);
+	public void setHoraTermino(Time horaTermino) {
+		valiTimempo(this.horaInicio, horaTermino);
 		this.horaTermino = horaTermino;
 	}
 
@@ -76,7 +76,7 @@ public class Horario {
 					"Tempo de percurso total invalido");
 	}
 
-	private void validaTempo(Date tempoInicial, Date tempoFinal) {
+	private void valiTimempo(Time tempoInicial, Time tempoFinal) {
 		if (tempoInicial == null
 				|| tempoFinal == null
 				|| (tempoFinal.before(tempoInicial)))

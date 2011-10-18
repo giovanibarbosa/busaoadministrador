@@ -40,7 +40,7 @@ public class RotaDAO {
 			throw new IllegalArgumentException("Rota nao foi criada");
 
 		String sql = "insert into rota (id,via, cor, numeroVisualizacao, diferencaEntreOnibus, "
-				+ "tempoPercursoTotal, horaInicio, horaTermino, urlRota, empresaId, numeroOnibus) "
+				+ "tempoPercursoTotal, horaInicio, horaTermino, urlRota, empresaId, numOnibus) "
 				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
@@ -50,8 +50,8 @@ public class RotaDAO {
 		st.setInt(4, rota.getNumeroVisualizacao());
 		st.setInt(5, rota.getHorario().getDiferencaEntreOnibus());
 		st.setInt(6, rota.getHorario().getTempoPercursoTotal());
-		st.setDate(7, rota.getHorario().getHoraInicio());
-		st.setDate(8, rota.getHorario().getHoraTermino());
+		st.setTime(7, rota.getHorario().getHoraInicio());
+		st.setTime(8, rota.getHorario().getHoraTermino());
 		st.setString(9, rota.getUrlRota());
 		st.setInt(10, rota.getEmpresaId());
 		st.setInt(11, rota.getNumeroDoOnibus());
@@ -68,7 +68,7 @@ public class RotaDAO {
 
 		String sql = "select (id, via, cor, numeroVisualizacao, diferencaEntreOnibus, "
 				+ "tempoPercursoTotal, horaInicio, horaTermino, "
-				+ "urlRota, empresaId, numeroDoOnibus) from rota where id=?";
+				+ "urlRota, empresaId, numOnibus) from rota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Rota rota = null;
 
@@ -91,11 +91,11 @@ public class RotaDAO {
 					rs.getInt("numeroVisualizacao"), new Horario(
 							rs.getInt("diferencaEntreOnibus"),
 							rs.getInt("tempoPercursoTotal"), 
-									rs.getDate("horaInicio"),
-									rs.getDate("horaTermino")
+									rs.getTime("horaInicio"),
+									rs.getTime("horaTermino")
 									),
 					rs.getInt("empresaId"), rs.getString("urlRota"),
-					rs.getInt("numeroDoOnibus"), rs.getString("via"));
+					rs.getInt("numOnibus"), rs.getString("via"));
 			rotas.add(rota);
 		}
 		return rotas;
@@ -106,9 +106,9 @@ public class RotaDAO {
 		if (rota == null || rotaAtualizada == null)
 			throw new IllegalArgumentException("A Rota nao pode ser atualizada");
 
-		String sql = "update rota set id = ?, via = ?, cor = ?, numeroVisualizacao = ?,  "
+		String sql = "upTime rota set id = ?, via = ?, cor = ?, numeroVisualizacao = ?,  "
 				+ "diferencaEntreOnibus = ?, tempoPercursoTotal = ?, horaInicio = ?, "
-				+ "horaTermino = ?, urlRota = ?, empresaId = ?,numeroDoOnibus=? where id = ?";
+				+ "horaTermino = ?, urlRota = ?, empresaId = ?,numOnibus=? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setString(1, rotaAtualizada.getIdentificador());
@@ -118,8 +118,8 @@ public class RotaDAO {
 		st.setInt(5, rotaAtualizada.getEmpresaId());
 		st.setInt(6, rotaAtualizada.getHorario().getDiferencaEntreOnibus());
 		st.setInt(7, rotaAtualizada.getHorario().getTempoPercursoTotal());
-		st.setDate(8, rotaAtualizada.getHorario().getHoraInicio());
-		st.setDate(9, rotaAtualizada.getHorario().getHoraTermino());
+		st.setTime(8, rotaAtualizada.getHorario().getHoraInicio());
+		st.setTime(9, rotaAtualizada.getHorario().getHoraTermino());
 		st.setString(10, rotaAtualizada.getUrlRota());
 		st.setInt(11, rotaAtualizada.getNumeroDoOnibus());
 		st.setString(12, rota.getIdentificador());
@@ -152,7 +152,7 @@ public class RotaDAO {
 			throws IllegalArgumentException, SQLException {
 		if (rota == null || onibus == null)
 			throw new IllegalArgumentException("Empresa ou Cidade inválida");
-		String sql = "update onibus set rotaId=? where id=?";
+		String sql = "upTime onibus set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (!recuperaOnibuss(rota).contains(onibus)) {
@@ -199,7 +199,7 @@ public class RotaDAO {
 			throws IllegalArgumentException, SQLException {
 		if (onibus == null || rota == null)
 			throw new IllegalArgumentException("Onibus ou Rota inválida");
-		String sql = "update onibus set rotaId=? where id=?";
+		String sql = "upTime onibus set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (recuperaOnibuss(rota).contains(onibus)) {
@@ -218,7 +218,7 @@ public class RotaDAO {
 			throws IllegalArgumentException, SQLException {
 		if (rota == null || ponto == null)
 			throw new IllegalArgumentException("Rota ou Ponto inválido");
-		String sql = "update pontoDeRota set rotaId=? where id=?";
+		String sql = "upTime pontoDeRota set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (!recuperaPontos(rota).contains(rota)) {
@@ -265,7 +265,7 @@ public class RotaDAO {
 			throws IllegalArgumentException, SQLException {
 		if (ponto == null || rota == null)
 			throw new IllegalArgumentException("Ponto ou Rota inválida");
-		String sql = "update pontoDeRota set rotaId=? where id=?";
+		String sql = "upTime pontoDeRota set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (recuperaPontos(rota).contains(ponto)) {
@@ -279,5 +279,7 @@ public class RotaDAO {
 		st.close();
 		return false;
 	}
-
+//	public static void main(String[] args) {
+//		Rota r = new Rota("903","","Azul", "903",);
+//	}
 }

@@ -16,15 +16,13 @@ import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.facade.BusaoAdministradorFacade;
 import br.edu.ufcg.dsc.service.RotaService;
-import java.sql.Date;
+import java.sql.Time;
 
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.accessibility.AccessibleText;
 import javax.swing.JOptionPane;
 
 /**
@@ -275,7 +273,8 @@ public class MenuRota extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_voltarButtonActionPerformed
 
-    private void addRotaButtonActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//GEN-FIRST:event_addRotaButtonActionPerformed
+    @SuppressWarnings("deprecation")
+	private void addRotaButtonActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//GEN-FIRST:event_addRotaButtonActionPerformed
         String id = identificadorField.getText();
         String cor = corField.getText();
         String link = linkGMapsField.getText();
@@ -291,18 +290,18 @@ public class MenuRota extends javax.swing.JFrame {
         Empresa empresa = (Empresa) JOptionPane.showInputDialog(null,"Escolha a empresa a ser removida:", "Busao Administrador",
     			JOptionPane.PLAIN_MESSAGE, null, facade.getEmpresas().toArray(), facade.getEmpresas().toArray()[0]);      
         
-        int tempoInicial = (horaInicial * 60) + minutoInicial;
-        int tempoFinal = (horaFinal * 60) + minutoFinal;
-        int tempoTotal = tempoFinal - tempoInicial;
+        int tempoInicial = ((horaInicial * 60) + minutoInicial) * 1000;
+        int tempoFinal = ((horaFinal * 60) + minutoFinal) * 1000;
+        int tempoTotal = (tempoFinal - tempoInicial)/1000;
         Object[] select = jTextArea1.getSelectedValues();
         List<Onibus> buss = new ArrayList<Onibus>();
         for(int i = 0;i < select.length; i ++){
         	buss.add((Onibus) select[i]);
         }
-        
-        Date tInicio = new Date(tempoInicial * 1000);
-        Date tFim = new Date(tempoFinal * 1000);
-        facade.cadastrarRota(empresa, new Rota(id, cor, buss, facade.extrairRotas(link), new Horario(intervalo,tempoTotal,tInicio, tFim), ""));
+       
+        Time tInicio = new Time(System.currentTimeMillis() + tempoInicial);
+        Time tFim = new Time(System.currentTimeMillis() + tempoFinal);
+        facade.cadastrarRota(new Rota(id, cor, buss, facade.extrairRotas(link), new Horario(intervalo,tempoTotal,tInicio, tFim), ""));
        
         JOptionPane.showMessageDialog(null, "Rota criada com sucesso");
         

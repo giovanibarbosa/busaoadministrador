@@ -216,4 +216,5 @@ public class CidadeDAO {
 		PreparedStatement st = conexao.prepareStatement(sql);
 		return resultSetToList(st.executeQuery());
 	}
+	
 }

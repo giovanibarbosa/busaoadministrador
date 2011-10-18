@@ -84,14 +84,14 @@ public class RotaService {
 		return rd.recuperaPontos(rd.recuperar(idRota));
 	}
 
-	public List<Ponto> extrairPontos(Rota r) {
+	public String extrairPontos(Rota r) {
 		return this.extrairPontos(r.getUrlRota());
 	}
 
 	// Aqui a gente tem que extrair pontos la do arquivo .kml
-	public List<Ponto> extrairPontos(String iframe) {
-		// TODO
-		return new ArrayList<Ponto>();
+	public String extrairPontos(String iframe) {
+		
+		return iframe;
 	}
 
 	public String getTodosHorario(String idRota)

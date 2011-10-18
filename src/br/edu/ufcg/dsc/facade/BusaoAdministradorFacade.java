@@ -116,10 +116,12 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 		return os.getOnibus();
 	}
 
-	public List<Ponto> extrairRotas(String link) {
+	public String extrairRotas(String link) {
 		return rs.extrairPontos(link);
 	}
-	
+	public void cadastrarRota(Rota r) throws IllegalArgumentException, SQLException{
+		rs.adicionaRota(r);
+	}
 	
 
 }
