@@ -26,8 +26,8 @@ public class EmpresaDAO {
 		return instancia;
 	}
 
-	public void criar(Empresa empresa) throws SQLException,
-			IllegalArgumentException {
+	public void criar(Empresa empresa) throws SQLException
+			 {
 		if (empresa == null)
 			throw new IllegalArgumentException("Empresa nao foi criada");
 
@@ -43,16 +43,15 @@ public class EmpresaDAO {
 		st.close();
 	}
 
-	public Empresa recuperar(String identificador) throws SQLException,
-			IllegalArgumentException {
-		if (identificador == null || !(identificador.matches("[0-9]+")))
-			throw new IllegalArgumentException("O identificador da Empresa deve ser valido");
+	public Empresa recuperar(int identificador) throws SQLException
+			 {
+
 
 		String sql = "select (nome, anoDeFundacao, cidadeId) from empresa where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Empresa empresa = null;
 
-		st.setInt(1, Integer.parseInt(identificador));
+		st.setInt(1, identificador);
 		ResultSet rs = st.executeQuery();
 		List<Empresa> empresas = resultSetToList(rs);
 
@@ -92,8 +91,8 @@ public class EmpresaDAO {
 		st.close();
 	}
 
-	public void deletar(Empresa empresa) throws SQLException,
-			IllegalArgumentException {
+	public void deletar(Empresa empresa) throws SQLException
+			 {
 		if (empresa == null)
 			throw new IllegalArgumentException("A Empresa nao pode ser removida");
 

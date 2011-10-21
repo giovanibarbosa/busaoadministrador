@@ -27,12 +27,12 @@ public class CidadeService {
 
 	}
 
-	public void adicionarCidade(Cidade cid) throws IllegalArgumentException,
+	public void adicionarCidade(Cidade cid) throws 
 			SQLException {
 		cd.criar(cid);
 	}
 
-	public void removeCidade(Cidade cid) throws IllegalArgumentException,
+	public void removeCidade(Cidade cid) throws 
 			SQLException {
 		cd.deletar(cid);
 	}
@@ -41,22 +41,12 @@ public class CidadeService {
 		return cd.listarTodas();
 	}
 
-	public boolean adicionaEmpresa(Cidade cid, Empresa empr)
-			throws IllegalArgumentException, SQLException {
-		return cd.adicionaEmpresa(empr, cid);
-	}
-
-	public boolean removeEmpresa(Cidade cid, Empresa empr)
-			throws IllegalArgumentException, SQLException {
-		return cd.removeEmpresa(empr, cid);
-	}
-
 	public Cidade getCidadePorNome(String nome)
-			throws IllegalArgumentException, SQLException {
+			throws  SQLException {
 		return cd.recuperarCidadePorNome(nome);
 	}
 	
-	public Cidade getCidadePorId(String id) throws IllegalArgumentException,
+	public Cidade getCidadePorId(int id) throws 
 			SQLException {
 		return cd.recuperar(id);
 	}

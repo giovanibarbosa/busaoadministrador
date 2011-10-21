@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Cidade;
-import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Ponto;
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
 
@@ -28,35 +27,33 @@ public class CidadeDAO {
 		return instancia;
 	}
 
-	public void criar(Cidade cidade) throws SQLException,
-			IllegalArgumentException {
+	public void criar(Cidade cidade) throws SQLException
+			 {
 		if (cidade == null)
 			throw new IllegalArgumentException("Cidade nao foi criada");
 
-		String sql = "insert into cidade (nome, estado, valorTarifa, latitude, longitude) values (?,?,?,?,?)";
+		String sql = "insert into cidade (id, nome, estado, valorTarifa, latitude, longitude) values (?,?,?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
-		st.setString(1, cidade.getNome().toLowerCase());
-		st.setString(2, cidade.getEstado());
-		st.setDouble(3, cidade.getValorTarifa());
-		st.setDouble(4, cidade.getPonto().getLatitude());
-		st.setDouble(5, cidade.getPonto().getLongitude());
+		st.setInt(1, cidade.getIdentificacao());
+		st.setString(2, cidade.getNome());
+		st.setString(3, cidade.getEstado());
+		st.setDouble(4, cidade.getValorTarifa());
+		st.setDouble(5, cidade.getPonto().getLatitude());
+		st.setDouble(6, cidade.getPonto().getLongitude());
 
 		st.execute();
 		st.close();
 	}
 
-	public Cidade recuperar(String identificador) throws SQLException,
-			IllegalArgumentException {
-		if (identificador == null || !(identificador.matches("[0-9]+")))
-			throw new IllegalArgumentException(
-					"O idenificador da Cidade deve ser valido ");
-
+	public Cidade recuperar(int identificador) throws SQLException
+			 {
+		
 		String sql = "select (nome, estado, valorTarifa, latitude, longitude) from cidade where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Cidade cidade = null;
 
-		st.setInt(1, Integer.parseInt(identificador));
+		st.setInt(1, identificador);
 		ResultSet rs = st.executeQuery();
 		List<Cidade> cidades = resultSetToList(rs);
 
@@ -66,8 +63,8 @@ public class CidadeDAO {
 		return cidade;
 	}
 
-	public Cidade recuperarCidadePorNome(String nome) throws SQLException,
-			IllegalArgumentException {
+	public Cidade recuperarCidadePorNome(String nome) throws SQLException
+			 {
 		if (nome == null)
 			throw new IllegalArgumentException(
 					"O nome da Cidade deve ser valido ");
@@ -101,21 +98,21 @@ public class CidadeDAO {
 		return cidades;
 	}
 
-	private List<Empresa> resultSetToEmpresaList(ResultSet rs)
-			throws SQLException {
-		List<Empresa> empresas = new ArrayList<Empresa>();
-		Empresa empresa = null;
-
-		while (rs.next()) {
-			empresa = new Empresa(rs.getInt("id"), rs.getString("nome"),
-					rs.getInt("anoDeFundacao"), rs.getInt("cidadeId"));
-			empresas.add(empresa);
-		}
-		return empresas;
-	}
+//	private List<Empresa> resultSetToEmpresaList(ResultSet rs)
+//			throws SQLException {
+//		List<Empresa> empresas = new ArrayList<Empresa>();
+//		Empresa empresa = null;
+//
+//		while (rs.next()) {
+//			empresa = new Empresa(rs.getInt("id"), rs.getString("nome"),
+//					rs.getInt("anoDeFundacao"), rs.getInt("cidadeId"));
+//			empresas.add(empresa);
+//		}
+//		return empresas;
+//	}
 
 	public void atualizar(Cidade cidade, Cidade cidadeAtualizada)
-			throws SQLException, IllegalArgumentException {
+			throws SQLException {
 		if (cidade == null || cidadeAtualizada == null)
 			throw new IllegalArgumentException(
 					"A Cidade nao pode ser atualizada");
@@ -134,8 +131,8 @@ public class CidadeDAO {
 		st.close();
 	}
 
-	public void deletar(Cidade cidade) throws SQLException,
-			IllegalArgumentException {
+	public void deletar(Cidade cidade) throws SQLException
+			 {
 		if (cidade == null)
 			throw new IllegalArgumentException("A Cidade nao pode ser removida");
 
@@ -148,39 +145,39 @@ public class CidadeDAO {
 		st.close();
 	}
 
-	private List<Empresa> recuperaEmpresas(Cidade cidade) throws SQLException,
-			IllegalArgumentException {
-		if (cidade == null)
-			throw new IllegalArgumentException("Cidade inválida");
-		String sql = "select * from empresa where cidadeId=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
+//	private List<Empresa> recuperaEmpresas(Cidade cidade) throws SQLException,
+//			IllegalArgumentException {
+//		if (cidade == null)
+//			throw new IllegalArgumentException("Cidade inválida");
+//		String sql = "select * from empresa where cidadeId=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		st.setInt(1, cidade.getIdentificacao());
+//		ResultSet rs = st.executeQuery();
+//		List<Empresa> empresas = resultSetToEmpresaList(rs);
+//
+//		st.close();
+//		return empresas;
+//	}
 
-		st.setInt(1, cidade.getIdentificacao());
-		ResultSet rs = st.executeQuery();
-		List<Empresa> empresas = resultSetToEmpresaList(rs);
-
-		st.close();
-		return empresas;
-	}
-
-	public boolean adicionaEmpresa(Empresa empresa, Cidade cidade)
-			throws IllegalArgumentException, SQLException {
-		if (empresa == null || cidade == null)
-			throw new IllegalArgumentException("Empresa ou Cidade inválida");
-		String sql = "update empresa set cidadeId=? where id=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
-
-		if (!recuperaEmpresas(cidade).contains(empresa)) {
-			st.setInt(1, cidade.getIdentificacao());
-			st.setInt(2, empresa.getIdentificador());
-			st.executeUpdate();
-			st.close();
-			return true;
-		}
-
-		st.close();
-		return false;
-	}
+//	public boolean adicionaEmpresa(Empresa empresa, Cidade cidade)
+//			throws IllegalArgumentException, SQLException {
+//		if (empresa == null || cidade == null)
+//			throw new IllegalArgumentException("Empresa ou Cidade inválida");
+//		String sql = "update empresa set cidadeId=? where id=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		if (!recuperaEmpresas(cidade).contains(empresa)) {
+//			st.setInt(1, cidade.getIdentificacao());
+//			st.setInt(2, empresa.getIdentificador());
+//			st.executeUpdate();
+//			st.close();
+//			return true;
+//		}
+//
+//		st.close();
+//		return false;
+//	}
 
 	/**
 	 * Metodo para remover uma empresa da Cidade apenas, nao removendo esta
@@ -192,24 +189,24 @@ public class CidadeDAO {
 	 * @throws IllegalArgumentException
 	 * @throws SQLException
 	 */
-	public boolean removeEmpresa(Empresa empresa, Cidade cidade)
-			throws IllegalArgumentException, SQLException {
-		if (empresa == null || cidade == null)
-			throw new IllegalArgumentException("Empresa ou Cidade inválida");
-		String sql = "update empresa set cidadeId=? where id=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
-
-		if (recuperaEmpresas(cidade).contains(empresa)) {
-			st.setObject(1, null);
-			st.setInt(2, empresa.getIdentificador());
-			st.executeUpdate();
-			st.close();
-			return true;
-		}
-
-		st.close();
-		return false;
-	}
+//	public boolean removeEmpresa(Empresa empresa, Cidade cidade)
+//			throws IllegalArgumentException, SQLException {
+//		if (empresa == null || cidade == null)
+//			throw new IllegalArgumentException("Empresa ou Cidade inválida");
+//		String sql = "update empresa set cidadeId=? where id=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		if (recuperaEmpresas(cidade).contains(empresa)) {
+//			st.setObject(1, null);
+//			st.setInt(2, empresa.getIdentificador());
+//			st.executeUpdate();
+//			st.close();
+//			return true;
+//		}
+//
+//		st.close();
+//		return false;
+//	}
 
 	public List<Cidade> listarTodas() throws SQLException {
 		String sql = "select * from cidade";

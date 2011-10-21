@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Ponto;
 import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
@@ -47,16 +46,6 @@ public class RotaService {
 		return rd.listarTodas();
 	}
 
-	public boolean adicionaOnibusNaRota(Rota r, Onibus o)
-			throws IllegalArgumentException, SQLException {
-		return rd.adicionaOnibus(r, o);
-	}
-
-	public boolean removeOnibusDaRota(Rota r, Onibus o)
-			throws SQLException {
-		return rd.removeOnibus(o, r);
-	}
-
 	public boolean adicionaPontoRota(Rota r, PontoDeRota p)
 			throws SQLException {
 		return rd.adicionaPonto(p, r);
@@ -67,7 +56,7 @@ public class RotaService {
 		return rd.removePonto(p, r);
 	}
 
-	// TODO
+	
 	public List<String> pesquisaRota(String identificador) throws SQLException {
 		List<Rota> allRotas = rd.listarTodas();
 		List<String> rotasIds = new ArrayList<String>();
@@ -116,20 +105,15 @@ public class RotaService {
 		return atributo + " Nao Encontrado";
 	}
 
+	@SuppressWarnings("deprecation")
 	public int calculaProximaPassagem(String idRota)
 			throws IllegalArgumentException, SQLException {
 		Rota r = null;
 		r = rd.recuperar(idRota);
 
-		// Transformar tudo para minutos
-		
-		// Pega hora do sistema e transfere pra minutos
 		int horaAtual = (int) (System.currentTimeMillis() / MILISSEGUNDOS_PARA_MINUTO);
-
-		// tempo de percurso passado em minutos
 		int tempoPercurso = r.getHorario().getTempoPercursoTotal();
 
-		// Resto da Divisao
 		return ((horaAtual - r.getHorario().getHoraInicio().getMinutes()) % tempoPercurso);
 	}
 
@@ -146,6 +130,11 @@ public class RotaService {
 	public List<Ponto> pontosDepoisIntegracao() {
 		// TODO
 		return null;
+	}
+
+	public Rota getRota(String id) throws SQLException {
+		
+		return rd.recuperar(id);
 	}
 
 }

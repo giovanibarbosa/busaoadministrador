@@ -18,13 +18,13 @@ public interface BusaoAdministradorFacadeIF {
 	
 	public void removerOnibus(Onibus o) throws IllegalArgumentException, SQLException;
 	
-	public boolean adicionarEmpresa (Cidade c, Empresa empr) throws IllegalArgumentException, SQLException;
+	public void adicionarEmpresa (Empresa empr) throws  SQLException;
 	
-	public boolean removerEmpresa (Cidade c, Empresa empr) throws IllegalArgumentException, SQLException;
+	public void removerEmpresa (Empresa empr) throws  SQLException;
 	
 	public boolean alterarRota (Empresa emp, Rota r);
 	
-	public boolean removerRota ( Rota r);
+	public void removerRota ( Rota r) throws SQLException;
 	
 	public void cadastrarRota (Rota r) throws  SQLException;
 	

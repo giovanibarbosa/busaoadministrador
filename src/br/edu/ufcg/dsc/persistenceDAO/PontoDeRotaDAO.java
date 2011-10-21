@@ -26,13 +26,13 @@ public class PontoDeRotaDAO {
 		return instancia;
 	}
 
-	public void criar(PontoDeRota pontoDeRota) throws SQLException,
-			IllegalArgumentException {
+	public void criar(PontoDeRota pontoDeRota) throws SQLException
+			 {
 		if (pontoDeRota == null)
 			throw new IllegalArgumentException(
 					"O PontoDeRota nao pode ser criado");
 
-		String sql = "insert into pontoDeRota (id, latitude, longitude, rotaId) values (?,?,?)";
+		String sql = "insert into pontoDeRota (id, latitude, longitude, rotaId) values (?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setInt(1, pontoDeRota.getId());
@@ -44,8 +44,8 @@ public class PontoDeRotaDAO {
 		st.close();
 	}
 
-	public PontoDeRota recuperar(String identificador) throws SQLException,
-			IllegalArgumentException {
+	public PontoDeRota recuperar(String identificador) throws SQLException
+			 {
 		if (identificador == null || !(identificador.matches("[0-9]+")))
 			throw new IllegalArgumentException(
 					"O identificador do PontoDeRota deve ser valido");
@@ -78,8 +78,8 @@ public class PontoDeRotaDAO {
 	}
 
 	public void atualizar(PontoDeRota pontoDeRota,
-			PontoDeRota pontoDeRotaAtualizada) throws SQLException,
-			IllegalArgumentException {
+			PontoDeRota pontoDeRotaAtualizada) throws SQLException
+			 {
 		if (pontoDeRota == null || pontoDeRotaAtualizada == null)
 			throw new IllegalArgumentException(
 					"O PontoDeRota nao pode ser atualizado");
@@ -97,8 +97,8 @@ public class PontoDeRotaDAO {
 		st.close();
 	}
 
-	public void deletar(PontoDeRota pontoDeRota) throws SQLException,
-			IllegalArgumentException {
+	public void deletar(PontoDeRota pontoDeRota) throws SQLException
+			 {
 		if (pontoDeRota == null)
 			throw new IllegalArgumentException();
 

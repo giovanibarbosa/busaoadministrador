@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Onibus;
+import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
+
 
 public class OnibusDAO {
 	private Connection conexao;
@@ -26,8 +28,8 @@ public class OnibusDAO {
 		return instancia;
 	}
 
-	public void criar(Onibus onibus) throws SQLException,
-			IllegalArgumentException {
+	public void criar(Onibus onibus) throws SQLException
+			 {
 		if (onibus == null)
 			throw new IllegalArgumentException("O Onibus nao pode ser criado");
 
@@ -37,13 +39,23 @@ public class OnibusDAO {
 		st.setString(1, onibus.getIdentificador());
 		st.setInt(2, onibus.getCapacidade());
 		st.setString(3, onibus.getRotaId());
-
+		adicionaOnibusRota(onibus.getRotaId());
 		st.execute();
 		st.close();
 	}
 
-	public Onibus recuperar(String identificador) throws SQLException,
-			IllegalArgumentException {
+	private void adicionaOnibusRota(String rotaId) throws SQLException {
+		String sql = "update rota set numOnibus = ? where id = ?";
+		PreparedStatement st = conexao.prepareStatement(sql);
+		Rota r = RotaDAO.getInstance().recuperar(rotaId);
+		st.setInt(1, r.getNumeroDoOnibus() + 1);
+		st.setString(2, rotaId);
+		st.execute();
+		st.close();
+	}
+
+	public Onibus recuperar(String identificador) throws SQLException
+			 {
 		if (identificador == null)
 				throw new IllegalArgumentException(
 					"O identificador do Onibus deve ser valido");

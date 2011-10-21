@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Horario;
-import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
@@ -35,7 +34,7 @@ public class RotaDAO {
 		return instancia;
 	}
 
-	public void criar(Rota rota) throws SQLException, IllegalArgumentException {
+	public void criar(Rota rota) throws SQLException{
 		if (rota == null)
 			throw new IllegalArgumentException("Rota nao foi criada");
 
@@ -60,8 +59,8 @@ public class RotaDAO {
 		st.close();
 	}
 
-	public Rota recuperar(String identificador) throws SQLException,
-			IllegalArgumentException {
+	public Rota recuperar(String identificador) throws SQLException
+			 {
 		if (identificador == null || !(identificador.matches("[0-9]+")))
 			throw new IllegalArgumentException(
 					"O identificador da Rota deve ser valido");
@@ -101,8 +100,8 @@ public class RotaDAO {
 		return rotas;
 	}
 
-	public void atualizar(Rota rota, Rota rotaAtualizada) throws SQLException,
-			IllegalArgumentException {
+	public void atualizar(Rota rota, Rota rotaAtualizada) throws SQLException
+			 {
 		if (rota == null || rotaAtualizada == null)
 			throw new IllegalArgumentException("A Rota nao pode ser atualizada");
 
@@ -148,77 +147,77 @@ public class RotaDAO {
 		return resultSetToList(st.executeQuery());
 	}
 
-	public boolean adicionaOnibus(Rota rota, Onibus onibus)
-			throws IllegalArgumentException, SQLException {
-		if (rota == null || onibus == null)
-			throw new IllegalArgumentException("Empresa ou Cidade inválida");
-		String sql = "upTime onibus set rotaId=? where id=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
+//	public boolean adicionaOnibus(Rota rota, Onibus onibus)
+//			throws IllegalArgumentException, SQLException {
+//		if (rota == null || onibus == null)
+//			throw new IllegalArgumentException("Empresa ou Cidade inválida");
+//		String sql = "update onibus set rotaId=? where id=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		if (!recuperaOnibuss(rota).contains(onibus)) {
+//			st.setString(1, rota.getIdentificador());
+//			st.setString(2, onibus.getIdentificador());
+//			st.executeUpdate();
+//			st.close();
+//			return true;
+//		}
+//
+//		st.close();
+//		return false;
+//	}
 
-		if (!recuperaOnibuss(rota).contains(onibus)) {
-			st.setString(1, rota.getIdentificador());
-			st.setString(2, onibus.getIdentificador());
-			st.executeUpdate();
-			st.close();
-			return true;
-		}
+//	public List<Onibus> recuperaOnibuss(Rota rota) throws SQLException,
+//			IllegalArgumentException {
+//		if (rota == null)
+//			throw new IllegalArgumentException("Rota inválida");
+//		String sql = "select * from onibus where rotaId=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		st.setString(1, rota.getIdentificador());
+//		ResultSet rs = st.executeQuery();
+//		List<Onibus> onibuss = resultSetToOnibusList(rs);
+//
+//		st.close();
+//		return onibuss;
+//	}
 
-		st.close();
-		return false;
-	}
+//	private List<Onibus> resultSetToOnibusList(ResultSet rs)
+//			throws SQLException {
+//		List<Onibus> onibuss = new ArrayList<Onibus>();
+//		Onibus onibus = null;
+//
+//		while (rs.next()) {
+//			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"),
+//					rs.getString("rotaId"));
+//			onibuss.add(onibus);
+//		}
+//		return onibuss;
+//	}
 
-	public List<Onibus> recuperaOnibuss(Rota rota) throws SQLException,
-			IllegalArgumentException {
-		if (rota == null)
-			throw new IllegalArgumentException("Rota inválida");
-		String sql = "select * from onibus where rotaId=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
-
-		st.setString(1, rota.getIdentificador());
-		ResultSet rs = st.executeQuery();
-		List<Onibus> onibuss = resultSetToOnibusList(rs);
-
-		st.close();
-		return onibuss;
-	}
-
-	private List<Onibus> resultSetToOnibusList(ResultSet rs)
-			throws SQLException {
-		List<Onibus> onibuss = new ArrayList<Onibus>();
-		Onibus onibus = null;
-
-		while (rs.next()) {
-			onibus = new Onibus(rs.getString("id"), rs.getInt("capacidade"),
-					rs.getString("rotaId"));
-			onibuss.add(onibus);
-		}
-		return onibuss;
-	}
-
-	public boolean removeOnibus(Onibus onibus, Rota rota)
-			throws IllegalArgumentException, SQLException {
-		if (onibus == null || rota == null)
-			throw new IllegalArgumentException("Onibus ou Rota inválida");
-		String sql = "upTime onibus set rotaId=? where id=?";
-		PreparedStatement st = conexao.prepareStatement(sql);
-
-		if (recuperaOnibuss(rota).contains(onibus)) {
-			st.setObject(1, null);
-			st.setString(2, onibus.getIdentificador());
-			st.executeUpdate();
-			st.close();
-			return true;
-		}
-
-		st.close();
-		return false;
-	}
+//	public boolean removeOnibus(Onibus onibus, Rota rota)
+//			throws IllegalArgumentException, SQLException {
+//		if (onibus == null || rota == null)
+//			throw new IllegalArgumentException("Onibus ou Rota inválida");
+//		String sql = "update onibus set rotaId=? where id=?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//
+//		
+//			st.setObject(1, null);
+//			st.setString(2, onibus.getIdentificador());
+//			st.executeUpdate();
+//			st.close();
+//			return true;
+//		
+//
+//		st.close();
+//		return false;
+//	}
 
 	public boolean adicionaPonto(PontoDeRota ponto, Rota rota)
-			throws IllegalArgumentException, SQLException {
+			throws  SQLException {
 		if (rota == null || ponto == null)
-			throw new IllegalArgumentException("Rota ou Ponto inválido");
-		String sql = "upTime pontoDeRota set rotaId=? where id=?";
+			throw new IllegalArgumentException("Rota ou Ponto invalido");
+		String sql = "update pontoDeRota set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (!recuperaPontos(rota).contains(rota)) {
@@ -235,7 +234,7 @@ public class RotaDAO {
 
 	public List<PontoDeRota> recuperaPontos(Rota rota) throws SQLException {
 		if (rota == null)
-			throw new IllegalArgumentException("Rota inválida");
+			throw new IllegalArgumentException("Rota invalida");
 		String sql = "select * from pontoDeRota where rotaId=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
@@ -262,10 +261,10 @@ public class RotaDAO {
 	}
 
 	public boolean removePonto(PontoDeRota ponto, Rota rota)
-			throws IllegalArgumentException, SQLException {
+			throws SQLException {
 		if (ponto == null || rota == null)
-			throw new IllegalArgumentException("Ponto ou Rota inválida");
-		String sql = "upTime pontoDeRota set rotaId=? where id=?";
+			throw new IllegalArgumentException("Ponto ou Rota invalida");
+		String sql = "update pontoDeRota set rotaId=? where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		if (recuperaPontos(rota).contains(ponto)) {
@@ -279,7 +278,5 @@ public class RotaDAO {
 		st.close();
 		return false;
 	}
-//	public static void main(String[] args) {
-//		Rota r = new Rota("903","","Azul", "903",);
-//	}
+
 }

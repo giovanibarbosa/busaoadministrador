@@ -11,7 +11,7 @@ public class EmpresaService {
 
 	private static EmpresaService instanciaUnica;
 	private EmpresaDAO empDAO;
-	private List<Empresa> empresas;
+
 	
 	private EmpresaService () throws SQLException {
 		empDAO = EmpresaDAO.getInstance();
@@ -60,9 +60,16 @@ public class EmpresaService {
 	}
 
 	public Empresa getEmpresaId(int id) throws IllegalArgumentException, SQLException {
-		return empDAO.recuperar(String.valueOf(id));
+		return empDAO.recuperar(id);
 		
 	}
 	
+	public void adicionar(Empresa e) throws SQLException{
+		empDAO.criar(e);
+	}
+	
+	public void removeEmpresa(Empresa e) throws SQLException{
+		empDAO.deletar(e);
+	}
 
 }

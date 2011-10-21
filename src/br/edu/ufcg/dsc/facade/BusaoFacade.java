@@ -61,7 +61,7 @@ public class BusaoFacade{
         	return null;
         }
 
-        public String obterCidade(String idCidade) throws IllegalArgumentException, SQLException {
+        public String obterCidade(int idCidade) throws IllegalArgumentException, SQLException {
         	return cs.getCidadePorId(idCidade).toString();
         }
         

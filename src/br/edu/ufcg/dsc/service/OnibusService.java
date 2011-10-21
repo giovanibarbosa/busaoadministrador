@@ -25,11 +25,11 @@ public class OnibusService {
 		
 	}
 	
-	public void addOnibus (Onibus o) throws IllegalArgumentException, SQLException{
+	public void addOnibus (Onibus o) throws  SQLException{
 		busDAO.criar(o);		
 	}
 	
-	public void removeOnibus(Onibus o) throws IllegalArgumentException, SQLException{
+	public void removeOnibus(Onibus o) throws  SQLException{
 		busDAO.deletar(o);
 	}
 	
@@ -37,11 +37,11 @@ public class OnibusService {
 		return busDAO.listarTodas();
 	}
 	
-	public String getIdOnibus(Onibus o) throws IllegalArgumentException, SQLException{
+	public String getIdOnibus(Onibus o) throws  SQLException{
 		return busDAO.recuperar(o.getIdentificador()).getIdentificador();
 	}
 	
-	public Onibus getOnibusPorId(String id) throws IllegalArgumentException, SQLException {
+	public Onibus getOnibusPorId(String id) throws  SQLException {
 		return busDAO.recuperar(id);
 	}
 

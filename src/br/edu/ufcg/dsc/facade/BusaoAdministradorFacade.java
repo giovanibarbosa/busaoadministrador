@@ -1,6 +1,5 @@
 package br.edu.ufcg.dsc.facade;
 
-import java.awt.Component;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.List;
 import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
-import br.edu.ufcg.dsc.bean.Ponto;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.service.CidadeService;
 import br.edu.ufcg.dsc.service.EmpresaService;
@@ -52,13 +50,13 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public boolean adicionarEmpresa(Cidade c, Empresa empr) throws IllegalArgumentException, SQLException {
-		return cs.adicionaEmpresa(c, empr);
+	public void adicionarEmpresa(Empresa empr) throws SQLException {
+		es.adicionar(empr);
 	}
 
 	@Override
-	public boolean removerEmpresa(Cidade c, Empresa empr) throws IllegalArgumentException, SQLException {
-		return cs.removeEmpresa(c, empr);
+	public void removerEmpresa(Empresa empr) throws SQLException {
+		 es.removeEmpresa(empr);
 	}
 
 	@Override
@@ -67,8 +65,8 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public boolean removerRota(Rota r) {
-		return true;
+	public void removerRota(Rota r) throws SQLException {
+		rs.removeRota(r);
 		//return es.removeRota(emp, r);
 	}
 
@@ -101,7 +99,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 		return es.getEmpresaId(id);
 	}
 	
-	public Cidade getCidade(String id) throws IllegalArgumentException, SQLException{
+	public Cidade getCidade(int id) throws IllegalArgumentException, SQLException{
 		return cs.getCidadePorId(id);
 	}
 
@@ -121,7 +119,13 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 		return rs.extrairPontos(link);
 	}
 
+	public List<Rota> getRotas() throws SQLException{
+		return rs.getRotas();
+	}
 	
+	public Rota getRota(String id) throws SQLException{
+		return rs.getRota(id);
+	}
 
 }
 

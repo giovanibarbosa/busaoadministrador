@@ -26,8 +26,7 @@ public class UsuarioDAO {
 		return instancia;
 	}
 
-	public Usuario recuperar() throws SQLException,
-			IllegalArgumentException {
+	public Usuario recuperar() throws SQLException {
 		String sql = "select * from usuario";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Usuario usuario = null;
@@ -51,5 +50,15 @@ public class UsuarioDAO {
 		}
 		return usuarios;
 	}
-
+	
+	public void cadastrar(Usuario user) throws SQLException{
+		String sql = "insert into usuario(login,senha) "
+				+ "values (?,?)";
+		PreparedStatement st = conexao.prepareStatement(sql);
+		st.setString(1, user.getLogin());
+		st.setString(2, user.getSenha());
+		
+		st.execute();
+		st.close();
+	}
 }
