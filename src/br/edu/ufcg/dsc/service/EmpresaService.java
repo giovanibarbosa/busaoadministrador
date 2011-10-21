@@ -33,27 +33,27 @@ public class EmpresaService {
 		return false;
 	}
 	
-	public boolean adicionaRota(Empresa emp, Rota r){
-		
-		if (!emp.getRotas().contains(r)){
-			emp.getRotas().add(r);
-			return true;
-		}
-		
-		return false;
-	}
+//	public boolean adicionaRota(Empresa emp, Rota r){
+//		
+//		if (!emp.getRotas().contains(r)){
+//			emp.getRotas().add(r);
+//			return true;
+//		}
+//		
+//		return false;
+//	}
 	
-	public boolean removeRota(Empresa emp, Rota r){
-		
-		for (int i = 0; i < emp.getRotas().size(); i++) {
-			if (emp.getRotas().get(i).equals(r)){
-				emp.getRotas().remove(i);
-				return true;
-			}
-		}
-		
-		return false;
-	}
+//	public boolean removeRota(Empresa emp, Rota r){
+//		
+//		for (int i = 0; i < emp.getRotas().size(); i++) {
+//			if (emp.getRotas().get(i).equals(r)){
+//				emp.getRotas().remove(i);
+//				return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
 	
 	public List<Empresa> getEmpresas() throws SQLException{
 		return empDAO.listarTodas();

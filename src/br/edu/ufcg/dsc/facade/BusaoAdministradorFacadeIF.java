@@ -24,9 +24,9 @@ public interface BusaoAdministradorFacadeIF {
 	
 	public boolean alterarRota (Empresa emp, Rota r);
 	
-	public boolean removerRota (Empresa emp, Rota r);
+	public boolean removerRota ( Rota r);
 	
-	public boolean cadastrarRota (Empresa emp, Rota r);
+	public void cadastrarRota (Rota r) throws  SQLException;
 	
 	public Date calculaProximaPassagem (Rota r, Date temp);
 	

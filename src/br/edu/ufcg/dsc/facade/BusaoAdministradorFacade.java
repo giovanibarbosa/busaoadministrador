@@ -67,13 +67,14 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	}
 
 	@Override
-	public boolean removerRota(Empresa emp, Rota r) {
-		return es.removeRota(emp, r);
+	public boolean removerRota(Rota r) {
+		return true;
+		//return es.removeRota(emp, r);
 	}
 
 	@Override
-	public boolean cadastrarRota(Empresa emp, Rota r) {
-		return es.adicionaRota(emp, r);
+	public void cadastrarRota(Rota r) throws SQLException {
+		rs.adicionaRota(r);
 	}
 
 	@Override
@@ -119,9 +120,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	public String extrairRotas(String link) {
 		return rs.extrairPontos(link);
 	}
-	public void cadastrarRota(Rota r) throws IllegalArgumentException, SQLException{
-		rs.adicionaRota(r);
-	}
+
 	
 
 }

@@ -33,12 +33,12 @@ public class RotaService {
 
 	}
 
-	public void adicionaRota(Rota rota) throws IllegalArgumentException,
+	public void adicionaRota(Rota rota) throws 
 			SQLException {
 		rd.criar(rota);
 	}
 
-	public void removeRota(Rota rota) throws IllegalArgumentException,
+	public void removeRota(Rota rota) throws 
 			SQLException {
 		rd.deletar(rota);
 	}
@@ -53,17 +53,17 @@ public class RotaService {
 	}
 
 	public boolean removeOnibusDaRota(Rota r, Onibus o)
-			throws IllegalArgumentException, SQLException {
+			throws SQLException {
 		return rd.removeOnibus(o, r);
 	}
 
 	public boolean adicionaPontoRota(Rota r, PontoDeRota p)
-			throws IllegalArgumentException, SQLException {
+			throws SQLException {
 		return rd.adicionaPonto(p, r);
 	}
 
 	public boolean removePontoDaRota(Rota r, PontoDeRota p)
-			throws IllegalArgumentException, SQLException {
+			throws  SQLException {
 		return rd.removePonto(p, r);
 	}
 
