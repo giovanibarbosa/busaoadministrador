@@ -318,7 +318,7 @@ private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 		JOptionPane.showMessageDialog(null, "A rota foi adicionada com sucesso!");
 	} catch (SQLException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
-	             "Nao foi possivel remover a rota",
+	             "Nao foi possivel adicionar a rota",
 	             JOptionPane.ERROR_MESSAGE);
 	}
 	MainMenuRota m = new MainMenuRota();

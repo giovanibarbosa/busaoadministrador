@@ -10,7 +10,21 @@
  */
 package br.edu.ufcg.dsc.gui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import br.edu.ufcg.dsc.bean.Cidade;
+import br.edu.ufcg.dsc.bean.Ponto;
+import br.edu.ufcg.dsc.facade.BusaoAdministradorFacade;
+
+
 
 /**
  *
@@ -78,7 +92,13 @@ public class MenuCidade extends javax.swing.JFrame {
         cadastrar.setText("Cadastrar");
         cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarActionPerformed(evt);
+                try {
+					cadastrarActionPerformed(evt);
+				} catch (IOException e) {
+					 JOptionPane.showMessageDialog(null, e.getMessage(),
+				             "Erro de conexao",
+				             JOptionPane.ERROR_MESSAGE);
+				}
             }
         });
 
@@ -160,12 +180,45 @@ public class MenuCidade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-	String ident = id.getText();
+private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_cadastrarActionPerformed
+	int ident = Integer.parseInt(id.getText());
 	String state = (String) estado.getSelectedItem();
-	String tax = tarifa.getText();
+	double tax = Double.parseDouble(tarifa.getText());
 	String name = nome.getText();
-	//Cidade c = new Cidade();
+	String nomeEspaco = removeEspaco(name.split(" "));
+	String estadoEspaco = removeEspaco(state.split(" "));
+	System.setProperty("http.proxyHost", InetAddress.getLocalHost().getHostAddress());  
+	System.setProperty("http.proxyPort", "8080");  
+	URL url = new URL("http://tinygeocoder.com/create-api.php?q=" + nomeEspaco +"," +estadoEspaco);
+	HttpURLConnection connection =  
+	    (HttpURLConnection) url.openConnection(); 
+	connection.setRequestProperty("Request-Method", "GET");
+	connection.setDoInput(true);  
+	connection.setDoOutput(false); 
+	connection.connect(); 
+	BufferedReader br =  
+	    new BufferedReader(new InputStreamReader(connection.getInputStream()));  
+	StringBuffer newData = new StringBuffer(100);  
+	String s = "";  
+	while (null != ((s = br.readLine()))) {  
+		  newData.append(s);  
+	}  
+	br.close(); 
+	String latLong = newData.toString();
+	Ponto p = new Ponto(Double.parseDouble(latLong.split(",")[0]), Double.parseDouble(latLong.split(",")[1]));
+	try {
+		new BusaoAdministradorFacade().adicionarCidade(new Cidade(ident,tax,name,state,p));
+		JOptionPane.showMessageDialog(null, "A cidade foi adicionada com sucesso!");
+	} catch (IllegalArgumentException e) {
+		 JOptionPane.showMessageDialog(null, e.getMessage(),
+	             "Cidade invalida",
+	             JOptionPane.ERROR_MESSAGE);
+	} catch (SQLException e) {
+		 JOptionPane.showMessageDialog(null, e.getMessage(),
+	             "Nao foi possivel adicionar a cidade",
+	             JOptionPane.ERROR_MESSAGE);
+	}
+	
 }//GEN-LAST:event_cadastrarActionPerformed
 
 private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
@@ -174,6 +227,16 @@ m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 m.setVisible(true);
 dispose();
 }//GEN-LAST:event_voltarActionPerformed
+private String removeEspaco(String[] lista){
+	for (int i = 0; i < lista.length - 1; i++) {
+		lista[i] = lista[i] + "%20";
+	}
+	String nomeSemEspaco = "";
+	for (int i = 0; i < lista.length; i++) {
+		nomeSemEspaco += lista[i];
+	}
+	return nomeSemEspaco;
+}
 
     /**
      * @param args the command line arguments
