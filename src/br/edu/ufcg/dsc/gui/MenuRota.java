@@ -91,7 +91,8 @@ public class MenuRota extends javax.swing.JFrame {
         jLabel8.setText("Hora final da rota");
 
         jLabel9.setText("Intervalo entre onibus (em minutos)");
-
+        
+        voltar.setIcon(new javax.swing.ImageIcon("/br/edu/ufcg/dsc/gui/images/1317175785_back.png")); // NOI18N
         cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ufcg/dsc/gui/images/1317256235_add1-.png"))); // NOI18N
         cadastrar.setText("Cadastrar");
         cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +132,7 @@ public class MenuRota extends javax.swing.JFrame {
 
         intervalo.setToolTipText("Preencha com o intervalo, em minutos, entre os onibus desta rota.");
 
-        voltar.setIcon(new javax.swing.ImageIcon("/br/edu/ufcg/dsc/gui/images/1317175785_back.png")); // NOI18N
+        
         voltar.setText("Voltar");
         voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
