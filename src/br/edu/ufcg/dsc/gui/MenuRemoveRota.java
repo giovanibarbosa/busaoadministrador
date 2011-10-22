@@ -152,6 +152,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	Rota rota = (Rota) jList1.getSelectedValue();
 	try {
 		facade.removerRota(rota);
+		 JOptionPane.showMessageDialog(null, "A rota foi removida com sucesso!");
 	} catch (IllegalArgumentException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	                "Rota invalida",
@@ -162,7 +163,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	                "Nao foi possivel remover a rota",
 	                JOptionPane.ERROR_MESSAGE);
 	}
-	 JOptionPane.showMessageDialog(null, "A rota foi removida com sucesso!");
+
 	 MainMenuRota m = new MainMenuRota();
 	 m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	 m.setVisible(true);

@@ -154,6 +154,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	Empresa emp = (Empresa) jList1.getSelectedValue();
 	try {
 		facade.removerEmpresa(emp);
+		 JOptionPane.showMessageDialog(null, "A empresa foi removida com sucesso!");
 	} catch (IllegalArgumentException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	                "Empresa invalida",
@@ -164,7 +165,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	                "Nao foi possivel remover a empresa",
 	                JOptionPane.ERROR_MESSAGE);
 	}
-	 JOptionPane.showMessageDialog(null, "A empresa foi removida com sucesso!");
+	
 	 MainMenuEmpresa m = new MainMenuEmpresa();
 	 m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	 m.setVisible(true);

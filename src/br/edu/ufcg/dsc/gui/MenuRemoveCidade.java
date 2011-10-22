@@ -152,6 +152,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	Cidade c = (Cidade) jList1.getSelectedValue();
 	try {
 		facade.removerCidade(c);
+		 JOptionPane.showMessageDialog(null, "Cidade foi removida com sucesso!");
 	} catch (IllegalArgumentException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	                "Cidade invalida",
@@ -162,7 +163,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	                "Nao foi possivel remover a cidade",
 	                JOptionPane.ERROR_MESSAGE);
 	}
-	 JOptionPane.showMessageDialog(null, "Cidade foi removida com sucesso!");
+	
 	 MainMenuCidade m = new MainMenuCidade();
 	 m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	 m.setVisible(true);

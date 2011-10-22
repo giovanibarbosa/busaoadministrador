@@ -158,14 +158,15 @@ private void salvarActionPerformed(java.awt.event.ActionEvent evt) throws SQLExc
 	Usuario u = new Usuario(login,senha);
 	try {
 		busao.adicionaUsuario(u);
+		 JOptionPane.showMessageDialog(null, "Usuario adicionado com sucesso"
+         );
 	} catch (SQLException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	                "Nao foi possivel adicionar usuario",
 	                JOptionPane.ERROR_MESSAGE);
 		;
 	}
-	 JOptionPane.showMessageDialog(null, "Usuario adicionado com sucesso"
-            );
+
 }//GEN-LAST:event_salvarActionPerformed
 
     /**

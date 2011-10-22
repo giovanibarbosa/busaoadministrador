@@ -152,6 +152,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	Onibus emp = (Onibus) jList1.getSelectedValue();
 	try {
 		facade.removerOnibus(emp);
+		 JOptionPane.showMessageDialog(null, "O onibus foi removido com sucesso!");
 	} catch (IllegalArgumentException e) {
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	                "Onibus invalido",
@@ -162,7 +163,7 @@ private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 	                "Nao foi possivel remover o onibus",
 	                JOptionPane.ERROR_MESSAGE);
 	}
-	 JOptionPane.showMessageDialog(null, "O onibus foi removido com sucesso!");
+	
 	 MainMenuOnibus m = new MainMenuOnibus();
 	 m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	 m.setVisible(true);
