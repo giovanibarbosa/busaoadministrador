@@ -26,11 +26,11 @@ public class UsuarioDAO {
 		return instancia;
 	}
 
-	public Usuario recuperar() throws SQLException {
-		String sql = "select * from usuario";
+	public Usuario recuperar(String nome) throws SQLException {
+		String sql = "select * from usuario where nome = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		Usuario usuario = null;
-
+		st.setString(1, nome);
 		ResultSet rs = st.executeQuery();
 		List<Usuario> usuarios = resultSetToList(rs);
 
@@ -45,14 +45,14 @@ public class UsuarioDAO {
 		Usuario usuario = null;
 
 		while (rs.next()) {
-			usuario = new Usuario(rs.getString("login"), rs.getString("senha"));
+			usuario = new Usuario(rs.getString("nome"), rs.getString("senha"));
 			usuarios.add(usuario);
 		}
 		return usuarios;
 	}
 	
 	public void cadastrar(Usuario user) throws SQLException{
-		String sql = "insert into usuario(login,senha) "
+		String sql = "insert into usuario(nome,senha) "
 				+ "values (?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		st.setString(1, user.getLogin());

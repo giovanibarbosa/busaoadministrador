@@ -96,9 +96,9 @@ public class Rota {
 
 	@Override
 	public String toString() {
-		return "Identificador: " + getIdentificador() + ". Cor: "
+		return "Id: " + getIdentificador() + ". Cor: " + getCor()
 				+ ". Número de visualização: " + getNumeroVisualizacao()
-				+ getHorario();
+				+" " + getHorario();
 	}
 	
 	public int getNumeroDoOnibus() {

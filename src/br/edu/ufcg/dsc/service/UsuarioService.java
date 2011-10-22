@@ -29,6 +29,10 @@ public class UsuarioService {
 	public void adicionar(Usuario u) throws SQLException{
 		ud.cadastrar(u);
 	}
+
+	public Usuario recuperar(String login) throws SQLException {
+		return ud.recuperar(login);
+	}
 	
 
 }

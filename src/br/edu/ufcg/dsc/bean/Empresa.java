@@ -25,8 +25,8 @@ public class Empresa {
 
 	@Override
 	public String toString() {
-		return "Identificador: " + getIdentificador() + ". Nome: " + getNome()
-				+ ". Ano de fundação: " + getAnoFundacao()+ ". Identificador da Cidade: " + getCidadeId();
+		return "Id: " + getIdentificador() + ". Nome: " + getNome()
+				+ ". Ano de fundacao: " + getAnoFundacao()+ ". Id da Cidade: " + getCidadeId();
 	}
 
 	public int getIdentificador() {

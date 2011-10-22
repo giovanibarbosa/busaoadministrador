@@ -1,17 +1,9 @@
 package br.edu.ufcg.dsc.persistenceFactory;
 
-import java.sql.SQLException;
+//import java.sql.SQLException;
 
-import br.edu.ufcg.dsc.bean.Cidade;
-import br.edu.ufcg.dsc.bean.Empresa;
-import br.edu.ufcg.dsc.bean.Horario;
-import br.edu.ufcg.dsc.bean.Onibus;
-import br.edu.ufcg.dsc.bean.Ponto;
-import br.edu.ufcg.dsc.bean.Rota;
-import br.edu.ufcg.dsc.persistenceDAO.CidadeDAO;
-import br.edu.ufcg.dsc.persistenceDAO.EmpresaDAO;
-import br.edu.ufcg.dsc.persistenceDAO.OnibusDAO;
-import br.edu.ufcg.dsc.persistenceDAO.RotaDAO;
+
+//import br.edu.ufcg.dsc.persistenceDAO.CidadeDAO;
 
 public class Main {
 
@@ -19,8 +11,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
-			CidadeDAO cid = CidadeDAO.getInstance();
+//		try {
+			//CidadeDAO cid = CidadeDAO.getInstance();
 //			OnibusDAO oni = OnibusDAO.getInstance();
 //			RotaDAO rota = RotaDAO.getInstance();
 //			EmpresaDAO emp = EmpresaDAO.getInstance();
@@ -60,9 +52,9 @@ public class Main {
 //			cidade.setIdentificacao(1);
 //			Empresa empresa = new Empresa(5, "Real");
 //			System.out.println(cid.recuperaEmpresas(cidade));
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
 
 	}
 

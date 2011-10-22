@@ -61,9 +61,7 @@ public class RotaDAO {
 
 	public Rota recuperar(String identificador) throws SQLException
 			 {
-		if (identificador == null || !(identificador.matches("[0-9]+")))
-			throw new IllegalArgumentException(
-					"O identificador da Rota deve ser valido");
+	
 
 		String sql = "select (id, via, cor, numeroVisualizacao, diferencaEntreOnibus, "
 				+ "tempoPercursoTotal, horaInicio, horaTermino, "
@@ -105,7 +103,7 @@ public class RotaDAO {
 		if (rota == null || rotaAtualizada == null)
 			throw new IllegalArgumentException("A Rota nao pode ser atualizada");
 
-		String sql = "upTime rota set id = ?, via = ?, cor = ?, numeroVisualizacao = ?,  "
+		String sql = "update rota set id = ?, via = ?, cor = ?, numeroVisualizacao = ?,  "
 				+ "diferencaEntreOnibus = ?, tempoPercursoTotal = ?, horaInicio = ?, "
 				+ "horaTermino = ?, urlRota = ?, empresaId = ?,numOnibus=? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);

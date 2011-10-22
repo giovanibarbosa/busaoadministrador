@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcg.dsc.bean.Onibus;
-import br.edu.ufcg.dsc.bean.Rota;
+
 import br.edu.ufcg.dsc.persistenceFactory.ConnectionFactory;
 
 
@@ -39,20 +39,21 @@ public class OnibusDAO {
 		st.setString(1, onibus.getIdentificador());
 		st.setInt(2, onibus.getCapacidade());
 		st.setString(3, onibus.getRotaId());
-		adicionaOnibusRota(onibus.getRotaId());
+	//	adicionaOnibusRota(onibus.getRotaId());
 		st.execute();
 		st.close();
 	}
 
-	private void adicionaOnibusRota(String rotaId) throws SQLException {
-		String sql = "update rota set numOnibus = ? where id = ?";
-		PreparedStatement st = conexao.prepareStatement(sql);
-		Rota r = RotaDAO.getInstance().recuperar(rotaId);
-		st.setInt(1, r.getNumeroDoOnibus() + 1);
-		st.setString(2, rotaId);
-		st.execute();
-		st.close();
-	}
+//	private void adicionaOnibusRota(String rotaId) throws SQLException {
+//		Rota r = RotaDAO.getInstance().recuperar(rotaId);
+//		String sql = "update rota set numOnibus = ? where id = ?";
+//		PreparedStatement st = conexao.prepareStatement(sql);
+//		
+//		st.setInt(1, r.getNumeroDoOnibus() + 1);
+//		st.setString(2, rotaId);
+//		st.executeUpdate();
+//		st.close();
+//	}
 
 	public Onibus recuperar(String identificador) throws SQLException
 			 {

@@ -8,10 +8,12 @@ import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
 import br.edu.ufcg.dsc.bean.Rota;
+import br.edu.ufcg.dsc.bean.Usuario;
 import br.edu.ufcg.dsc.service.CidadeService;
 import br.edu.ufcg.dsc.service.EmpresaService;
 import br.edu.ufcg.dsc.service.OnibusService;
 import br.edu.ufcg.dsc.service.RotaService;
+import br.edu.ufcg.dsc.service.UsuarioService;
 
 
 
@@ -21,12 +23,14 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	private OnibusService os;
 	private EmpresaService es;
 	private RotaService rs;
+	private UsuarioService us;
 	
 	public BusaoAdministradorFacade() throws SQLException{
 		cs = CidadeService.getInstance();
 		os = OnibusService.getInstance();
 		es = EmpresaService.getInstance();
 		rs = RotaService.getInstance();
+		us = UsuarioService.getInstance();
 	}
 
 	@Override
@@ -87,7 +91,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 
 	@Override
 	public Date calculaProximaPassagem(Rota r, Date temp) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
@@ -125,6 +129,15 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	
 	public Rota getRota(String id) throws SQLException{
 		return rs.getRota(id);
+	}
+	
+	public void adicionaUsuario(Usuario u) throws SQLException{
+		us.adicionar(u);
+	}
+
+	public Usuario getUsuario(String login) throws SQLException {
+		return us.recuperar(login);
+		
 	}
 
 }

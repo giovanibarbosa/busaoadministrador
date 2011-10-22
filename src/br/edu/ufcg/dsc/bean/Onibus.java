@@ -48,7 +48,7 @@ public class Onibus {
 	
 	@Override
 	public String toString() {
-		return "Identificador: " + getIdentificador() + ". Capacidade: " + getCapacidade();
+		return "Id: " + getIdentificador() + ". Capacidade: " + getCapacidade();
 	}
 	
 	private void validaIdentificador(String identificador){
