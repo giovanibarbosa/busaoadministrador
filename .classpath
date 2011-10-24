@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/android.jar"/>
 	<classpathentry kind="lib" path="lib/maps.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Anderson/Downloads/jgeocoder-0.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Henrique/workspaceAndroid/jdom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

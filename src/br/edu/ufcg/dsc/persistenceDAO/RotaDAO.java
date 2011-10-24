@@ -276,5 +276,11 @@ public class RotaDAO {
 		st.close();
 		return false;
 	}
+	
+	public void getPontosURLKML(String url){
+		
+	}
+	
+	
 
 }

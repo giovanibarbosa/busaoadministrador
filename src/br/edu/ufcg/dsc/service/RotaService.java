@@ -1,5 +1,7 @@
 package br.edu.ufcg.dsc.service;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,10 @@ import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.persistenceDAO.RotaDAO;
 import java.sql.Date;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
 
 public class RotaService {
 
@@ -73,14 +79,78 @@ public class RotaService {
 		return rd.recuperaPontos(rd.recuperar(idRota));
 	}
 
-	public String extrairPontos(Rota r) {
+	public List<String> extrairPontos(Rota r) {
 		return this.extrairPontos(r.getUrlRota());
 	}
 
-	// Aqui a gente tem que extrair pontos la do arquivo .kml
-	public String extrairPontos(String iframe) {
-		
-		return iframe;
+	/**
+	 * Metodo que extrai todos os pontos que estao dentro de um arquivo KML passado pelo criador da Rota
+	 * Esse arquivo é baseado em um arquivo XML. É usado a api JDOM para fazer a leitura do arquvio
+	 * @param url - a url do arquivo KML a ser extraido os pontos
+	 * @return List - Uma lista de todas as Rotas no formato: [latitude,longitude]
+	 */
+	public List<String> extrairPontos(String url) {
+		if(url == null || url.equals("")){
+			return new ArrayList<String>();
+		}
+		Document doc = null;
+		SAXBuilder builder = new SAXBuilder();
+		try {
+			URLConnection conn = new URL(url).openConnection();
+			doc = builder.build(conn.getInputStream());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Element agenda = doc.getRootElement();
+		List<Element> lista = agenda.getChildren();
+		lista = lista.get(0).getChildren();
+		List<String> pontosEncontrados = new ArrayList<String>();
+		for (Element e : lista) {
+			if (e.getName().equals("Placemark")){
+				List<Element> nodosFilhos = e.getChildren();
+				for (Element filho : nodosFilhos){
+					if(filho.getName().equals("LineString")){
+						List<Element> nodosNetos = filho.getChildren();
+						String[] ponto = new String[2];
+						for (Element neto : nodosNetos){
+							if (neto.getName().equals("coordinates")){
+								List<String> pontosString = getPontosDaString(neto.getText());
+								for (String cordenada : pontosString) {
+									if(!pontosEncontrados.contains(cordenada)){
+										pontosEncontrados.add(cordenada);
+									}
+								}
+								
+							}
+							
+						}
+					}
+					
+				}
+			}
+
+		}
+		return pontosEncontrados;
+	}
+	
+	/**
+	 * Metodo que extrai pontos de uma dadas String
+	 * @param pontos - String contendo todos os pontos
+	 * @return List - Lista de todos os pontos encontradas nessa String.
+	 */
+	private List<String> getPontosDaString(String pontos){
+		pontos = pontos.replaceAll(" ", "");
+		List<String> pontosEncontrados = new ArrayList<String>();
+		String[] linhas = pontos.split("\n");
+		for (String string : linhas) {
+			String[] cordenadas = string.split(",");
+			if(cordenadas.length == 3){
+				String cordenada = cordenadas[1]+","+cordenadas[0];
+				pontosEncontrados.add(cordenada);			
+				
+			}
+		}
+		return pontosEncontrados;
 	}
 
 	public String getTodosHorario(String idRota)
