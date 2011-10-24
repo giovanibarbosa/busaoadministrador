@@ -119,7 +119,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 		return os.getOnibus();
 	}
 
-	public String extrairRotas(String link) {
+	public List<String> extrairRotas(String link) {
 		return rs.extrairPontos(link);
 	}
 
