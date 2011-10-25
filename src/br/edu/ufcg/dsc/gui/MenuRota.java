@@ -352,7 +352,7 @@ private void addPontosRota(List<String> pontos, String idRota){
 	String[] pontoTemp = new String[2];
 	for (int i = 0; i < pontos.size(); i++) {
 		pontoTemp = pontos.get(i).split(",");
-		ponto = new PontoDeRota(0,Double.parseDouble(pontoTemp[0]),Double.parseDouble(pontoTemp[1]),idRota);
+		ponto = new PontoDeRota(0,Double.parseDouble(pontoTemp[1]),Double.parseDouble(pontoTemp[0]),idRota);
 		try {
 			facade.addPontoRota(ponto);
 		} catch (SQLException e) {
