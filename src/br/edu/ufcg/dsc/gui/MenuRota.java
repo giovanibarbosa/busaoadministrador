@@ -12,12 +12,14 @@ package br.edu.ufcg.dsc.gui;
 
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 
 
 import javax.swing.JOptionPane;
 
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Horario;
+import br.edu.ufcg.dsc.bean.PontoDeRota;
 
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.facade.BusaoAdministradorFacade;
@@ -293,7 +295,8 @@ private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     String cor = this.cor.getText();
     String link = this.link.getText();
     String via = this.via.getText();
-    
+    List<String> pontos = facade.extraiPontos(link);
+    addPontosRota(pontos,id);
     int horaInicial = Integer.parseInt(horaInicio.getSelectedItem().toString());
     int minutoInicial = Integer.parseInt(minutoInicio.getSelectedItem().toString());
     
@@ -320,6 +323,7 @@ private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 		 JOptionPane.showMessageDialog(null, e.getMessage(),
 	             "Nao foi possivel adicionar a rota",
 	             JOptionPane.ERROR_MESSAGE);
+		 e.printStackTrace();
 	}
 	MainMenuRota m = new MainMenuRota();
 	m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -343,6 +347,21 @@ private void linkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:ev
 
 }//GEN-LAST:event_linkActionPerformed
 
+private void addPontosRota(List<String> pontos, String idRota){
+	PontoDeRota ponto = null;
+	String[] pontoTemp = new String[2];
+	for (int i = 0; i < pontos.size(); i++) {
+		pontoTemp = pontos.get(i).split(",");
+		ponto = new PontoDeRota(0,Double.parseDouble(pontoTemp[0]),Double.parseDouble(pontoTemp[1]),idRota);
+		try {
+			facade.addPontoRota(ponto);
+		} catch (SQLException e) {
+			 JOptionPane.showMessageDialog(null, e.getMessage(),
+		             "Erro ao adicionar um ponto na rota",
+		             JOptionPane.ERROR_MESSAGE);
+		}
+	}
+}
     /**
      * @param args the command line arguments
      */

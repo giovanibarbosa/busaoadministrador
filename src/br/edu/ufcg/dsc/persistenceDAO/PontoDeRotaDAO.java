@@ -32,7 +32,7 @@ public class PontoDeRotaDAO {
 			throw new IllegalArgumentException(
 					"O PontoDeRota nao pode ser criado");
 
-		String sql = "insert into pontoDeRota (id, latitude, longitude, rotaId) values (?,?,?,?)";
+		String sql = "insert into pontoderota (id, latitude, longitude, rotaId) values (?,?,?,?)";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setInt(1, pontoDeRota.getId());
@@ -50,7 +50,7 @@ public class PontoDeRotaDAO {
 			throw new IllegalArgumentException(
 					"O identificador do PontoDeRota deve ser valido");
 
-		String sql = "select (id, latitude, longitude, rotaId) from pontoDeRota where id=?";
+		String sql = "select (id, latitude, longitude, rotaId) from pontoderota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		PontoDeRota pontoDeRota = null;
 
@@ -84,7 +84,7 @@ public class PontoDeRotaDAO {
 			throw new IllegalArgumentException(
 					"O PontoDeRota nao pode ser atualizado");
 
-		String sql = "update pontoDeRota set id = ?, longitude = ?, latitude= ?, rotaId = ? where id = ?";
+		String sql = "update pontoderota set id = ?, longitude = ?, latitude= ?, rotaId = ? where id = ?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setInt(1, pontoDeRotaAtualizada.getId());
@@ -102,7 +102,7 @@ public class PontoDeRotaDAO {
 		if (pontoDeRota == null)
 			throw new IllegalArgumentException();
 
-		String sql = "delete from pontoDeRota where id=?";
+		String sql = "delete from pontoderota where id=?";
 		PreparedStatement st = conexao.prepareStatement(sql);
 
 		st.setInt(1, pontoDeRota.getId());
@@ -112,7 +112,7 @@ public class PontoDeRotaDAO {
 	}
 
 	public List<PontoDeRota> listarTodas() throws SQLException {
-		String sql = "select * from pontoDeRota";
+		String sql = "select * from pontoderota";
 		PreparedStatement st = conexao.prepareStatement(sql);
 		return resultSetToList(st.executeQuery());
 	}

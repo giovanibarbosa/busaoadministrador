@@ -7,8 +7,10 @@ import java.util.List;
 import br.edu.ufcg.dsc.bean.Cidade;
 import br.edu.ufcg.dsc.bean.Empresa;
 import br.edu.ufcg.dsc.bean.Onibus;
+import br.edu.ufcg.dsc.bean.PontoDeRota;
 import br.edu.ufcg.dsc.bean.Rota;
 import br.edu.ufcg.dsc.bean.Usuario;
+import br.edu.ufcg.dsc.persistenceDAO.PontoDeRotaDAO;
 import br.edu.ufcg.dsc.service.CidadeService;
 import br.edu.ufcg.dsc.service.EmpresaService;
 import br.edu.ufcg.dsc.service.OnibusService;
@@ -24,6 +26,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	private EmpresaService es;
 	private RotaService rs;
 	private UsuarioService us;
+	private PontoDeRotaDAO pd;
 	
 	public BusaoAdministradorFacade() throws SQLException{
 		cs = CidadeService.getInstance();
@@ -31,6 +34,7 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 		es = EmpresaService.getInstance();
 		rs = RotaService.getInstance();
 		us = UsuarioService.getInstance();
+		pd = PontoDeRotaDAO.getInstance();
 	}
 
 	@Override
@@ -138,6 +142,14 @@ public class BusaoAdministradorFacade implements BusaoAdministradorFacadeIF {
 	public Usuario getUsuario(String login) throws SQLException {
 		return us.recuperar(login);
 		
+	}
+	
+	public void addPontoRota(PontoDeRota ponto) throws SQLException{
+		pd.criar(ponto);
+	}
+	
+	public List<String> extraiPontos(String link){
+		return rs.extrairPontos(link);
 	}
 
 }
